@@ -6,7 +6,7 @@ public class PaddleBehavior : MonoBehaviour {
     public GameObject forceOrigin, gameManage, ball, paddle, paddlePlacement, innerRot;
     GameManager gm;
     public float rotSpeed = 10f, gravity = .03f;
-    bool paused = false;
+    public bool paused = false;
     Vector3 savedVelocity;
     Vector3 savedAngularVelocity;
 
@@ -35,7 +35,7 @@ public class PaddleBehavior : MonoBehaviour {
             gm.ForceUpdate(force);
             if (paddle.transform.position != paddlePlacement.transform.position)
             {
-                paddle.transform.position += (paddle.transform.up * force / 5000);
+                paddle.transform.position += (innerRot.transform.up * force / 5000);
             }
             // transform.Rotate(new Vector3(0, 0, 1) * rotSpeed); //for mouse
         }
@@ -48,7 +48,7 @@ public class PaddleBehavior : MonoBehaviour {
             gm.ForceUpdate(force);
             if(paddle.transform.position != paddlePlacement.transform.position)
             {
-                paddle.transform.position += (paddle.transform.up * force/5000);
+                paddle.transform.position += (innerRot.transform.up * force/5000);
             }
            // transform.Rotate(new Vector3(0, 0, 1) * rotSpeed); //for mouse
         }

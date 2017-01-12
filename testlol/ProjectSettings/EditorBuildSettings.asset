@@ -10,6 +10,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/quiz1.unity
   - enabled: 1
+    path: Assets/Scenes/lvl2.unity
+  - enabled: 1
     path: Assets/Scenes/lvl1.unity
   - enabled: 0
     path: Assets/Scenes/test lvl1.unity
