@@ -98,4 +98,8 @@ public class GameManager : MySingleton<GameManager>
         int nextScene = SceneManager.GetActiveScene().buildIndex + 1;
         SceneManager.LoadScene(nextScene);
     }
+    public void LevelLoad (int level)
+    {
+        SceneManager.LoadScene(level);
+    }
 }

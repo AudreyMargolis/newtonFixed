@@ -2,9 +2,9 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class Compass : MonoBehaviour
+public class compass : MonoBehaviour
 {
-    public GameObject ball,magText;
+    public GameObject ball,magText,paddle;
     Rigidbody ballrb;
 	// Use this for initialization
 	void Start ()
@@ -22,7 +22,8 @@ public class Compass : MonoBehaviour
                 Quaternion targetRot = Quaternion.AngleAxis(-angle, Vector3.forward);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRot, 300 * Time.deltaTime);
             }
-       // magText.GetComponent<Text>().text = Mathf.RoundToInt(ballrb.velocity.magnitude) + "m/s";
+            if(paddle.GetComponent<PaddleBehavior>().paused == false)
+                magText.GetComponent<Text>().text = Mathf.RoundToInt(ballrb.velocity.magnitude) + "m/s";
         //transform.position = ball.transform.position;
     }
 }
