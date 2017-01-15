@@ -26,7 +26,7 @@ public class LevelUI : MonoBehaviour {
     {
 
     }
-    public void WinScreen(float lvlscore)
+    public virtual void WinScreen(float lvlscore)
     {
         winUI.SetActive(true);
         statsPanel.SetActive(false);

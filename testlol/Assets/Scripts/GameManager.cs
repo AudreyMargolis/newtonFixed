@@ -49,8 +49,11 @@ public class GameManager : MySingleton<GameManager>
             paddle = GameObject.Find("PaddleRoot");
         if (paddle != null)
         {
-            paddle.GetComponent<PaddleBehavior>().charges += bonusCharges;
-            paddle.GetComponent<PaddleBehavior>().pauses += bonusPauses;
+            if (SceneManager.GetActiveScene().buildIndex != 1)
+            {
+                paddle.GetComponent<PaddleBehavior>().charges += bonusCharges;
+                paddle.GetComponent<PaddleBehavior>().pauses += bonusPauses;
+            }
         }
         
     }
