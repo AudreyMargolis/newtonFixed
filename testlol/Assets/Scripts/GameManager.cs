@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-//using LoLSDK;
+using LoLSDK;
 
 public class GameManager : MySingleton<GameManager>
 {
@@ -19,7 +19,7 @@ public class GameManager : MySingleton<GameManager>
     // Use this for initialization
     void Awake()
     {
-        //LOLSDK.Init("com.margolisdesign.projectnewton");
+        LOLSDK.Init("com.margolisdesign.projectnewton");
        
     }
     void Start ()
