@@ -4,28 +4,35 @@ using System.Collections;
 public class MainMenu : MonoBehaviour
 {
     Animator mainAnim, lvlAnim;
-    public GameObject mainMenuPanel, lvlPanel;
-	// Use this for initialization
-	void Start ()
+    public GameObject[] levelPanels;
+    int currentPanel;
+	void Start()
     {
-        mainAnim = mainMenuPanel.GetComponent<Animator>();
-        lvlAnim = lvlPanel.GetComponent<Animator>();
+        currentPanel = 0;
     }
-	
-	// Update is called once per frame
-	void Update ()
-    {
-	
-	}
     public void ToLevel()
     {
-        mainAnim.Play("MainMenuClose");
-        lvlAnim.Play("ToLevel");
+        
     }
     public void ToMenu()
     {
-       mainAnim.Play("MainMenuOpen");
-       lvlAnim.Play("ToMenu");
+        levelPanels[currentPanel].SetActive(false);
+        currentPanel = 0;
+        levelPanels[currentPanel].SetActive(true);
+    }
+    public void NextPanel()
+    {
+        levelPanels[currentPanel].SetActive(false);
+        currentPanel++;
+        Debug.Log(currentPanel);
+        levelPanels[currentPanel].SetActive(true);
+    }
+    public void PreviousPanel()
+    {
+        levelPanels[currentPanel].SetActive(false);
+        currentPanel--;
+        Debug.Log(currentPanel);
+        levelPanels[currentPanel].SetActive(true);
     }
     public void LevelPicked(int level)
     {
