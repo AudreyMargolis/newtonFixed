@@ -32,17 +32,24 @@ public class PaddleBehavior : MonoBehaviour {
        
         if (grabbed)
         {
+           
+
             Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 15);
             Vector3 lookPos = Camera.main.ScreenToWorldPoint(mousePos);
+            transform.parent = null;
             transform.position = new Vector3(lookPos.x, lookPos.y, transform.position.z);
-
-            force = (int)Vector3.Distance(transform.position, ball.transform.position) * 50;
+            if(Vector3.Distance(transform.position, lerpTarget.transform.position) < 1f)
+                force = (int)Vector3.Distance(transform.position, ball.transform.position) * 50;
+           else if (Vector3.Distance(transform.position, lerpTarget.transform.position) < 2f && Vector3.Distance(transform.position, lerpTarget.transform.position) > 1f)
+                force = (int)Vector3.Distance(transform.position, ball.transform.position) * 100;
+            else
+                force = (int)Vector3.Distance(transform.position, ball.transform.position) * 150;
             gm.ForceUpdate(force);
             if (Input.GetMouseButtonDown(0))
             {
                 //apply forcestuff here
                 UnPause();
-                ball.GetComponent<Rigidbody>().AddForce(transform.forward * force);
+                ball.GetComponent<Rigidbody>().AddForce(transform.right * force);
                 charges--;
                 gm.ChargeUpdate(charges);
 
@@ -66,21 +73,27 @@ public class PaddleBehavior : MonoBehaviour {
                         }
                     }
             }
-            if (Vector3.Distance(transform.position, lerpTarget.transform.position) > 0.3f)
+            if (Vector3.Distance(transform.position, lerpTarget.transform.position) > 0.3f && transform.parent == null)
             {
-                // transform.position = Vector3.MoveTowards(transform.position, new Vector3(ball.transform.position.x,
-                // ball.transform.position.y,transform.position.z), Time.deltaTime * lerpSpeed);
-                //transform.position += transform.forward * lerpSpeed * Time.deltaTime;
-                if(!isRunning)
+                if (!isRunning)
                     StartCoroutine(MoveFunctionFast());
             }
-            //else
-               // transform.RotateAround(ball.transform.position, Vector3.forward, 50f * Time.deltaTime);
-            //Vector3.Lerp(paddle.transform.position, new Vector3(ball.transform.position.x,
-            //ball.transform.position.y,paddle.transform.position.z), Time.deltaTime * lerpSpeed);
+            else
+                transform.parent = ball.transform;
         }
-        transform.LookAt(new Vector3(ball.transform.position.x, ball.transform.position.y, transform.position.z));
-            #region
+        // transform.LookAt(new Vector3(ball.transform.position.x, ball.transform.position.y, transform.position.z));
+        //Vector3 difference =ball.transform.position - transform.position;
+        // float rotationZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
+        // transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ);
+       // if (transform.parent == null)
+       // {
+            Vector3 lookTo = ball.transform.position;
+            lookTo = lookTo - transform.position;
+            float angle = Mathf.Atan2(lookTo.y, lookTo.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        //}
+
+        #region
         /* if (Input.GetKeyDown(KeyCode.A))
          {
              if (force > 0)
@@ -190,7 +203,7 @@ public class PaddleBehavior : MonoBehaviour {
                  }
              }
          } */
-            #endregion
+        #endregion
     }
     void UnPause()
     {
@@ -212,7 +225,7 @@ public class PaddleBehavior : MonoBehaviour {
     {
         isRunning = true;
         float timeSinceStarted = 0f;
-        while (Vector3.Distance(transform.position, lerpTarget.transform.position) > 0.3f)
+        while (Vector3.Distance(transform.position, lerpTarget.transform.position) > 0.1f)
         {
             timeSinceStarted += Time.deltaTime;
            transform.position = Vector3.Lerp(transform.position, new Vector3(lerpTarget.transform.position.x,

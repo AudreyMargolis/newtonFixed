@@ -149,6 +149,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1000010695649116
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000011725685290}
+  - 114: {fileID: 114000011430803496}
+  m_Layer: 0
+  m_Name: Paddle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1000011149948014
 GameObject:
   m_ObjectHideFlags: 1
@@ -293,7 +309,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &1000011943824300
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -301,9 +317,8 @@ GameObject:
   - 4: {fileID: 4000013919797622}
   - 33: {fileID: 33000013686232118}
   - 23: {fileID: 23000013829625928}
-  - 114: {fileID: 114000013933520610}
   m_Layer: 0
-  m_Name: Paddle
+  m_Name: PaddleModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -840,7 +855,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 4000013919797622}
+  - {fileID: 4000011725685290}
   - {fileID: 4000010326284532}
   - {fileID: 4000014279865080}
   - {fileID: 4000010369863554}
@@ -859,6 +874,20 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 4000013919797622}
+  m_RootOrder: 0
+--- !u!4 &4000011725685290
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010695649116}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.4854022, y: -0.20875967, z: 0.76}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children:
+  - {fileID: 4000013919797622}
+  m_Father: {fileID: 4000010408612888}
   m_RootOrder: 0
 --- !u!4 &4000012260212750
 Transform:
@@ -894,13 +923,13 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011943824300}
   m_LocalRotation: {x: -0, y: -0, z: -0.9975641, w: 0.06975653}
-  m_LocalPosition: {x: -1.4854022, y: -0.20875967, z: 0.76}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_Children:
   - {fileID: 4000010475786282}
   - {fileID: 4000014067030884}
-  m_Father: {fileID: 4000010408612888}
+  m_Father: {fileID: 4000011725685290}
   m_RootOrder: 0
 --- !u!4 &4000014067030884
 Transform:
@@ -969,7 +998,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011537207494}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -1828,7 +1857,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ball: {fileID: 1000010340782958}
   magText: {fileID: 1000014059244970}
-  paddle: {fileID: 1000011943824300}
+  paddle: {fileID: 1000010695649116}
 --- !u!114 &114000011402440118
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1889,6 +1918,31 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114000011430803496
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010695649116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c70746b738caaf4488306b972f168698, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  force: 0
+  charges: 0
+  pauses: 0
+  gameManage: {fileID: 0}
+  ball: {fileID: 1000010340782958}
+  paddleCollider: {fileID: 1000011537207494}
+  lerpTarget: {fileID: 1000012626402664}
+  rotSpeed: 10
+  gravity: 0.03
+  paused: 0
+  grabbed: 0
+  cursorTexture: {fileID: 0}
+  cursorMode: 0
+  hotSpot: {x: 0, y: 0}
 --- !u!114 &114000011547233348
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2733,31 +2787,6 @@ MonoBehaviour:
   m_Spacing: 50
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
---- !u!114 &114000013933520610
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011943824300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c70746b738caaf4488306b972f168698, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  force: 0
-  charges: 10
-  pauses: 2
-  gameManage: {fileID: 0}
-  ball: {fileID: 1000010340782958}
-  paddleCollider: {fileID: 1000011537207494}
-  lerpTarget: {fileID: 1000012626402664}
-  rotSpeed: 10
-  gravity: 0.03
-  paused: 0
-  grabbed: 0
-  cursorTexture: {fileID: 0}
-  cursorMode: 0
-  hotSpot: {x: 0, y: 0}
 --- !u!114 &114000013939944592
 MonoBehaviour:
   m_ObjectHideFlags: 1
