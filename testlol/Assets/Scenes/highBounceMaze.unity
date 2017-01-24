@@ -782,7 +782,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 24
 --- !u!215 &490793819
 ReflectionProbe:
   m_ObjectHideFlags: 0
@@ -1071,7 +1071,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 66
+  m_RootOrder: 67
 --- !u!1001 &658412687
 Prefab:
   m_ObjectHideFlags: 0
@@ -1329,7 +1329,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 4.7840004, y: 180.00002, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!45 &718747472
 Skybox:
   m_ObjectHideFlags: 0
@@ -1424,9 +1424,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 37f54bec96a45d14baefe8a57c1976f3, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 8018a0b4c7452ab49a064b83505ce955, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -2423,7 +2423,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
 --- !u!1001 &1332134639
 Prefab:
   m_ObjectHideFlags: 0
@@ -2665,7 +2665,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
 --- !u!1001 &1453184910
 Prefab:
   m_ObjectHideFlags: 0

@@ -3,11 +3,13 @@ using System.Collections;
 
 public class MainMenu : MonoBehaviour
 {
-    Animator mainAnim, lvlAnim;
     public GameObject[] levelPanels;
+    public AudioClip prevMenu, nextMenu, buttonClick;
+    AudioSource audio;
     int currentPanel;
 	void Start()
     {
+        audio = GetComponent<AudioSource>();
         currentPanel = 0;
     }
     public void ToLevel()
@@ -22,6 +24,8 @@ public class MainMenu : MonoBehaviour
     }
     public void NextPanel()
     {
+        audio.clip = nextMenu;
+        audio.Play();
         levelPanels[currentPanel].SetActive(false);
         currentPanel++;
         Debug.Log(currentPanel);
@@ -29,6 +33,8 @@ public class MainMenu : MonoBehaviour
     }
     public void PreviousPanel()
     {
+        audio.clip = prevMenu;
+        audio.Play();
         levelPanels[currentPanel].SetActive(false);
         currentPanel--;
         Debug.Log(currentPanel);
@@ -36,6 +42,17 @@ public class MainMenu : MonoBehaviour
     }
     public void LevelPicked(int level)
     {
+        audio.clip = buttonClick;
+        audio.Play();
+        StartCoroutine(LevelLoad(level));
+       
+    }
+    IEnumerator LevelLoad(int level)
+    {
+        while (audio.isPlaying)
+        {
+            yield return null;
+        }
         GameManager a = (GameManager)FindObjectOfType(typeof(GameManager));
         a.LevelLoad(level);
     }

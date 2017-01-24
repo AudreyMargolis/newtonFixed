@@ -6,6 +6,7 @@ public class Goal : MonoBehaviour
    
     public float scoreMod;
     bool scored;
+    AudioSource audio;
 	// Use this for initialization
 	void Start ()
     {
@@ -17,6 +18,7 @@ public class Goal : MonoBehaviour
         if (gameObject.tag == "GoalBad")
             scoreMod = 1f;
         scored = false;
+        audio = GetComponent<AudioSource>();
 
     }
 	
@@ -30,10 +32,13 @@ public class Goal : MonoBehaviour
         if (other.gameObject.tag == "Ball")
         {
             Vector3 velocity = other.gameObject.GetComponent<Rigidbody>().velocity;
-            if (Vector3.Distance(velocity, Vector3.zero) <= .1f)
+            if (Vector3.Distance(velocity, Vector3.zero) <= .3f)
             {
                 if (!scored)
                 {
+                    GameObject cam = GameObject.FindGameObjectWithTag("MainCamera");
+                    cam.GetComponent<AudioSource>().Stop();
+                    audio.Play();
                     GameManager gm = (GameManager)FindObjectOfType(typeof(GameManager));
                     gm.Goal(scoreMod);
                     scored = true;
