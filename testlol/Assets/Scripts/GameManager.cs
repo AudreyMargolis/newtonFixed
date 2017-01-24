@@ -9,10 +9,11 @@ public class GameManager : MySingleton<GameManager>
     
 
     Text forceText, chargeText, pauseText, winText;
+    Image chargeFill;
     int gamescore;
     public float lvlscore = 1000;
-    public int lvlCharges, lvlPauses, bonusCharges, bonusPauses, startCharge, startPause;
-    public GameObject forceUI, chargeUI, pauseUI, winUI;
+    public int lvlCharges, lvlPauses, bonusCharges, bonusPauses, startCharge, startPause, maxForce;
+    public GameObject forceUI, chargeUI,chargeUIBar, pauseUI, winUI;
     public GameObject paddle;
     bool isPlaying;
 
@@ -48,6 +49,10 @@ public class GameManager : MySingleton<GameManager>
             pauseUI = GameObject.Find("pauseText");
         if (pauseUI != null)
             pauseText = pauseUI.GetComponent<Text>();
+        if(chargeUIBar == null)
+            chargeUIBar = GameObject.Find("chargeMid");
+        if (chargeUIBar != null)
+            chargeFill = chargeUIBar.GetComponent<Image>();
         if (paddle == null)
             paddle = GameObject.Find("PaddleRoot");
         if (paddle != null)
@@ -92,8 +97,10 @@ public class GameManager : MySingleton<GameManager>
     {
         isPlaying = true;
         chargeText.text = "Charge " + charges + "";
+        
         if (charges < startCharge)
             lvlscore -= 25;
+
     }
     public void PauseUpdate(int pauses)
     {
@@ -101,9 +108,17 @@ public class GameManager : MySingleton<GameManager>
         if (pauses < startPause)
             lvlscore -= 50;
     }
-    public void ForceUpdate(int force)
+    public void ForceUpdate(float force)
     {
-        forceText.text = "Force " + force + "N";
+        forceText.text = "Force " + force.ToString("0000.00") + " N";
+       
+        if (force == 0)
+            chargeFill.fillAmount = force / 1500f;
+        else
+        {
+            chargeFill.fillAmount = force / 1500f;
+            Debug.Log(force/ 1500);
+        }
     }
     public void LoadLevelAfterQuiz(int bonus)
     {

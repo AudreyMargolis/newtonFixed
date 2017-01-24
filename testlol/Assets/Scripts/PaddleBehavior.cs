@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class PaddleBehavior : MonoBehaviour {
-    public int force, charges, pauses;
+    public int charges, pauses;
+    public float force;
     public GameObject  gameManage, ball;
     public GameObject paddleCollider, lerpTarget;
     GameManager gm;
@@ -11,6 +12,7 @@ public class PaddleBehavior : MonoBehaviour {
     public bool paused = false, grabbed = false;
     Vector3 savedVelocity;
     Vector3 savedAngularVelocity;
+    public int maxForce = 1500;
 
     public Texture2D cursorTexture;
     public CursorMode cursorMode = CursorMode.Auto;
@@ -24,6 +26,7 @@ public class PaddleBehavior : MonoBehaviour {
         gm.PauseUpdate(pauses);
         Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
         Pause();
+        maxForce = 1500;
     }
 
     // Update is called once per frame
@@ -38,13 +41,17 @@ public class PaddleBehavior : MonoBehaviour {
             Vector3 lookPos = Camera.main.ScreenToWorldPoint(mousePos);
             transform.parent = null;
             transform.position = new Vector3(lookPos.x, lookPos.y, transform.position.z);
+            
             if(Vector3.Distance(transform.position, lerpTarget.transform.position) < 1f)
-                force = (int)Vector3.Distance(transform.position, ball.transform.position) * 50;
+                force = Vector3.Distance(transform.position, ball.transform.position) * 50;
            else if (Vector3.Distance(transform.position, lerpTarget.transform.position) < 2f && Vector3.Distance(transform.position, lerpTarget.transform.position) > 1f)
-                force = (int)Vector3.Distance(transform.position, ball.transform.position) * 100;
+                force = Vector3.Distance(transform.position, ball.transform.position) * 100;
             else
-                force = (int)Vector3.Distance(transform.position, ball.transform.position) * 150;
-            gm.ForceUpdate(force);
+                force = Vector3.Distance(transform.position, ball.transform.position) * 150;
+            if (force > maxForce)
+                force = maxForce;
+            force = Mathf.Round(force * 100f) / 100f;
+            
             if (Input.GetMouseButtonDown(0))
             {
                 //apply forcestuff here
@@ -204,6 +211,10 @@ public class PaddleBehavior : MonoBehaviour {
              }
          } */
         #endregion
+    }
+    void LateUpdate()
+    {
+        gm.ForceUpdate(force);
     }
     void UnPause()
     {
