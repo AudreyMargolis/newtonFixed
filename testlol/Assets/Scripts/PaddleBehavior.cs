@@ -19,6 +19,8 @@ public class PaddleBehavior : MonoBehaviour {
     public Vector2 hotSpot = Vector2.zero;
 
     bool isRunning = false;
+    AudioSource audio;
+
     // Use this for initialization
     void Start () {
         gm = (GameManager) FindObjectOfType(typeof(GameManager));
@@ -27,16 +29,16 @@ public class PaddleBehavior : MonoBehaviour {
         Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
         Pause();
         maxForce = 1500;
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-       
+       audio.pitch = (force / 1500f) + 0.3f;
+        audio.volume = (force / 1500f) + 0.3f;
         if (grabbed)
         {
-           
-
             Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 15);
             Vector3 lookPos = Camera.main.ScreenToWorldPoint(mousePos);
             transform.parent = null;
@@ -57,6 +59,7 @@ public class PaddleBehavior : MonoBehaviour {
                 //apply forcestuff here
                 UnPause();
                 ball.GetComponent<Rigidbody>().AddForce(transform.right * force);
+                force = 0;
                 charges--;
                 gm.ChargeUpdate(charges);
 

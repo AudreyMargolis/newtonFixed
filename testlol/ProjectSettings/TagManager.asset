@@ -8,6 +8,10 @@ TagManager:
   - GoalGood
   - GoalMeh
   - GoalBad
+  - HighBounce
+  - MedBounce
+  - LowBounce
+  - all
   layers:
   - Default
   - TransparentFX

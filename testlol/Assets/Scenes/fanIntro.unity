@@ -3723,6 +3723,10 @@ Prefab:
       propertyPath: m_Name
       value: 4UnitBlock (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 1000012681799562, guid: 842f818bb24e9a64e88d782354fdad95, type: 2}
+      propertyPath: m_TagString
+      value: LowBounce
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 842f818bb24e9a64e88d782354fdad95, type: 2}
   m_IsPrefabParent: 0
@@ -7556,11 +7560,6 @@ Prefab:
     - target: {fileID: 4000010408612888, guid: 78d7638211f524946adeaea0faf8903f, type: 2}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000013474245662, guid: 78d7638211f524946adeaea0faf8903f,
-        type: 2}
-      propertyPath: statsPanel
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 78d7638211f524946adeaea0faf8903f, type: 2}
