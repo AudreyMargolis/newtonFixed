@@ -18,6 +18,9 @@ public class PaddleBehavior : MonoBehaviour {
     public CursorMode cursorMode = CursorMode.Auto;
     public Vector2 hotSpot = Vector2.zero;
 
+    public GameObject tetherSprite;
+    GameObject tempTether;
+
     bool isRunning = false;
     AudioSource audio;
 
@@ -39,6 +42,8 @@ public class PaddleBehavior : MonoBehaviour {
         audio.volume = (force / 1500f) + 0.3f;
         if (grabbed)
         {
+            if (tempTether != null)
+                StartCoroutine(ExitTether());
             Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 15);
             Vector3 lookPos = Camera.main.ScreenToWorldPoint(mousePos);
             transform.parent = null;
@@ -89,7 +94,14 @@ public class PaddleBehavior : MonoBehaviour {
                     StartCoroutine(MoveFunctionFast());
             }
             else
+            {
+                if (tempTether == null)
+                {
+                    tempTether = Instantiate(tetherSprite, transform.position - (transform.forward * 2), Quaternion.Euler(new Vector3(0, 0, transform.rotation.z +95))) as GameObject;
+                    tempTether.transform.parent = gameObject.transform;
+                }
                 transform.parent = ball.transform;
+            }
         }
         // transform.LookAt(new Vector3(ball.transform.position.x, ball.transform.position.y, transform.position.z));
         //Vector3 difference =ball.transform.position - transform.position;
@@ -247,6 +259,12 @@ public class PaddleBehavior : MonoBehaviour {
             yield return null;
         }
         isRunning = false;
+    }
+    IEnumerator ExitTether()
+    {
+        tempTether.GetComponent<Animator>().SetBool("Close", true);
+        yield return new WaitForSeconds(0.3f);
+        Destroy(tempTether);
     }
    
 }

@@ -2148,6 +2148,8 @@ MonoBehaviour:
   cursorTexture: {fileID: 0}
   cursorMode: 0
   hotSpot: {x: 0, y: 0}
+  tetherSprite: {fileID: 1000010738954150, guid: 07b1434d356eb174da79e38a65e464f2,
+    type: 2}
 --- !u!114 &114000011547233348
 MonoBehaviour:
   m_ObjectHideFlags: 1
