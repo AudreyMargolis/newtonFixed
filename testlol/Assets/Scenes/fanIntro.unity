@@ -3304,11 +3304,6 @@ Prefab:
       propertyPath: m_Name
       value: PushBlock
       objectReference: {fileID: 0}
-    - target: {fileID: 114000011390610918, guid: f487fd36ba11a534b99a39c1a85f0b11,
-        type: 2}
-      propertyPath: windForce
-      value: 25
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f487fd36ba11a534b99a39c1a85f0b11, type: 2}
   m_IsPrefabParent: 0
