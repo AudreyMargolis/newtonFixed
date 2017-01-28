@@ -15,6 +15,7 @@ public class GameManager : MySingleton<GameManager>
     public int lvlCharges, lvlPauses, bonusCharges, bonusPauses, startCharge, startPause, maxForce;
     public GameObject forceUI, chargeUI,chargeUIBar, pauseUI, winUI;
     public GameObject paddle;
+    public bool playerControl;
     bool isPlaying;
 
     // Use this for initialization
@@ -36,6 +37,7 @@ public class GameManager : MySingleton<GameManager>
     void OnLevelWasLoaded ()
     {
         lvlscore = 1000;
+        playerControl = false;
         InvokeRepeating("LessenScore", 1.0f, 1.0f);
         if (forceUI == null)
             forceUI = GameObject.Find("forceText");
@@ -45,10 +47,10 @@ public class GameManager : MySingleton<GameManager>
             chargeUI = GameObject.Find("chargeText");
         if (chargeUI != null)
             chargeText = chargeUI.GetComponent<Text>();
-        if (pauseUI == null)
-            pauseUI = GameObject.Find("pauseText");
-        if (pauseUI != null)
-            pauseText = pauseUI.GetComponent<Text>();
+       // if (pauseUI == null)
+        //    pauseUI = GameObject.Find("pauseText");
+       // if (pauseUI != null)
+           // pauseText = pauseUI.GetComponent<Text>();
         if(chargeUIBar == null)
             chargeUIBar = GameObject.Find("chargeMid");
         if (chargeUIBar != null)
@@ -61,8 +63,8 @@ public class GameManager : MySingleton<GameManager>
             {
                 paddle.GetComponent<PaddleBehavior>().charges += bonusCharges;
                 startCharge = paddle.GetComponent<PaddleBehavior>().charges;
-                paddle.GetComponent<PaddleBehavior>().pauses += bonusPauses;
-                startPause = paddle.GetComponent<PaddleBehavior>().pauses;
+               // paddle.GetComponent<PaddleBehavior>().pauses += bonusPauses;
+               // startPause = paddle.GetComponent<PaddleBehavior>().pauses;
             }
         }
         
@@ -102,10 +104,9 @@ public class GameManager : MySingleton<GameManager>
             lvlscore -= 25;
 
     }
-    public void PauseUpdate(int pauses)
+   public void PauseUpdate(int pauses)
     {
-        pauseText.text = "Pauses " + pauses + "";
-        if (pauses < startPause)
+        if (pauses > 2)
             lvlscore -= 50;
     }
     public void ForceUpdate(float force)

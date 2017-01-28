@@ -185,4 +185,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   windDir: 1
-  windForce: 20
+  windForce: 25

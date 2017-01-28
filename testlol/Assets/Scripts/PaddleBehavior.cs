@@ -2,12 +2,13 @@
 using System.Collections;
 
 public class PaddleBehavior : MonoBehaviour {
-    public int charges, pauses;
+    public int charges;
+    int pauses;
     public float force;
     public GameObject  gameManage, ball;
     public GameObject paddleCollider, lerpTarget;
     GameManager gm;
-    public float rotSpeed = 10f, gravity = .03f;
+    public float rotSpeed = 10f;
     float lerpSpeed = 5f;
     public bool paused = false, grabbed = false;
     Vector3 savedVelocity;
@@ -28,54 +29,62 @@ public class PaddleBehavior : MonoBehaviour {
     void Start () {
         gm = (GameManager) FindObjectOfType(typeof(GameManager));
         gm.ChargeUpdate(charges);
-        gm.PauseUpdate(pauses);
+        //gm.PauseUpdate(pauses);
         Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
         Pause();
         maxForce = 1500;
         audio = GetComponent<AudioSource>();
+        pauses = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-       audio.pitch = (force / 1500f) + 0.3f;
-        audio.volume = (force / 1500f) + 0.3f;
-        if (grabbed)
+        if (gm.playerControl)
         {
-            if (tempTether != null)
-                StartCoroutine(ExitTether());
-            Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 15);
-            Vector3 lookPos = Camera.main.ScreenToWorldPoint(mousePos);
-            transform.parent = null;
-            transform.position = new Vector3(lookPos.x, lookPos.y, transform.position.z);
-            
-            if(Vector3.Distance(transform.position, lerpTarget.transform.position) < 1f)
-                force = Vector3.Distance(transform.position, ball.transform.position) * 50;
-           else if (Vector3.Distance(transform.position, lerpTarget.transform.position) < 2f && Vector3.Distance(transform.position, lerpTarget.transform.position) > 1f)
-                force = Vector3.Distance(transform.position, ball.transform.position) * 100;
-            else
-                force = Vector3.Distance(transform.position, ball.transform.position) * 150;
-            if (force > maxForce)
-                force = maxForce;
-            force = Mathf.Round(force * 100f) / 100f;
-            
-            if (Input.GetMouseButtonDown(0))
+            audio.pitch = (force / 1500f) + 0.3f;
+            audio.volume = (force / 1500f) + 0.3f;
+            if (grabbed)
             {
-                //apply forcestuff here
-                UnPause();
-                ball.GetComponent<Rigidbody>().AddForce(transform.right * force);
-                force = 0;
-                charges--;
-                gm.ChargeUpdate(charges);
+                if (tempTether != null)
+                    StartCoroutine(ExitTether());
+                Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 15);
+                Vector3 lookPos = Camera.main.ScreenToWorldPoint(mousePos);
+                transform.parent = null;
+                transform.position = new Vector3(lookPos.x, lookPos.y, transform.position.z);
 
-                grabbed = false;
+                if (Vector3.Distance(transform.position, lerpTarget.transform.position) < 1f)
+                    force = Vector3.Distance(transform.position, ball.transform.position) * 50;
+                else if (Vector3.Distance(transform.position, lerpTarget.transform.position) < 2f && Vector3.Distance(transform.position, lerpTarget.transform.position) > 1f)
+                    force = Vector3.Distance(transform.position, ball.transform.position) * 100;
+                else
+                    force = Vector3.Distance(transform.position, ball.transform.position) * 150;
+                if (force > maxForce)
+                    force = maxForce;
+                force = Mathf.Round(force * 100f) / 100f;
+
+                if (Input.GetMouseButtonDown(0))
+                {
+
+                    //apply forcestuff here
+                    if (paused)
+                        Pause();
+                    if (charges > 0)
+                    {
+                        ball.GetComponent<Rigidbody>().AddForce(transform.right * force);
+                        force = 0;
+                        charges--;
+                        gm.ChargeUpdate(charges);
+
+                        grabbed = false;
+                    }
+                }
             }
-        }
-       if(!grabbed)
-        {
-            if (Input.GetMouseButtonDown(0))
+            if (!grabbed)
             {
-               
+                if (Input.GetMouseButtonDown(0))
+                {
+
                     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                     RaycastHit hit;
 
@@ -87,165 +96,70 @@ public class PaddleBehavior : MonoBehaviour {
 
                         }
                     }
-            }
-            if (Vector3.Distance(transform.position, lerpTarget.transform.position) > 0.3f && transform.parent == null)
-            {
-                if (!isRunning)
-                    StartCoroutine(MoveFunctionFast());
-            }
-            else
-            {
-                if (tempTether == null)
-                {
-                    tempTether = Instantiate(tetherSprite, transform.position - (transform.forward * 2), Quaternion.Euler(new Vector3(0, 0, transform.rotation.z +95))) as GameObject;
-                    tempTether.transform.parent = gameObject.transform;
                 }
-                transform.parent = ball.transform;
+                if (Vector3.Distance(transform.position, lerpTarget.transform.position) > 0.3f && transform.parent == null)
+                {
+                    if (!isRunning)
+                        StartCoroutine(MoveFunctionFast());
+                }
+                else
+                {
+                    if (tempTether == null)
+                    {
+                        tempTether = Instantiate(tetherSprite, transform.position - (transform.forward * 2), Quaternion.Euler(new Vector3(0, 0, transform.rotation.z + 95))) as GameObject;
+                        tempTether.transform.parent = gameObject.transform;
+                    }
+                    transform.parent = ball.transform;
+                }
             }
-        }
-        // transform.LookAt(new Vector3(ball.transform.position.x, ball.transform.position.y, transform.position.z));
-        //Vector3 difference =ball.transform.position - transform.position;
-        // float rotationZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
-        // transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ);
-       // if (transform.parent == null)
-       // {
             Vector3 lookTo = ball.transform.position;
             lookTo = lookTo - transform.position;
             float angle = Mathf.Atan2(lookTo.y, lookTo.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        //}
+        }
+        else
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
 
-        #region
-        /* if (Input.GetKeyDown(KeyCode.A))
-         {
-             if (force > 0)
-                 force -= 5;
-             else
-                 force = 0;
-             gm.ForceUpdate(force);
-             if (paddle.transform.position != paddlePlacement.transform.position)
-             {
-                 paddle.transform.position += (innerRot.transform.up * force / 5000);
-             }
-             // transform.Rotate(new Vector3(0, 0, 1) * rotSpeed); //for mouse
-         }
-         if (Input.GetKey(KeyCode.A))
-         {
-             if (force > 0)
-                 force-=10;
-             else
-                 force = 0;
-             gm.ForceUpdate(force);
-             if(paddle.transform.position != paddlePlacement.transform.position)
-             {
-                 paddle.transform.position += (innerRot.transform.up * force/5000);
-             }
-            // transform.Rotate(new Vector3(0, 0, 1) * rotSpeed); //for mouse
-         }
-         if (Input.GetKeyDown(KeyCode.D))
-         {
-             if (force < 9999)
-                 force += 5;
-             else
-                 force = 9999;
-             gm.ForceUpdate(force);
-             paddle.transform.position -= (innerRot.transform.up * force / 5000);
-             //transform.Rotate(new Vector3(0, 0, -1) * rotSpeed); // for mouse
-         }
-         if (Input.GetKey(KeyCode.D))
-         {
-              if (force < 9999)
-                  force += 10;
-              else
-                  force = 9999;
-              gm.ForceUpdate(force);
-              paddle.transform.position -=(innerRot.transform.up * force/5000);
-             //transform.Rotate(new Vector3(0, 0, -1) * rotSpeed); // for mouse
-         }
-         /*if (Input.GetAxis("Mouse X") < 0 ) //for mouse
-         {
-             if (force > 0)
-                 force -= 10;
-             else
-                 force = 0;
-             gm.ForceUpdate(force);
-             if (paddle.transform.position != paddlePlacement.transform.position)
-             {
-                 paddle.transform.position += (transform.up * force / 10000);
-             }
-         }
-         if(Input.GetAxis("Mouse X") > 0)
-         {
-             if (force < 9999)
-                 force += 10;
-             else
-                 force = 9999;
-             gm.ForceUpdate(force);
-             paddle.transform.position -= (transform.up * force / 10000);
-         }
-         Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10);
-         Vector3 lookPos = Camera.main.ScreenToWorldPoint(mousePos);
-         lookPos = lookPos - transform.position;
-         float angle = Mathf.Atan2(lookPos.y, lookPos.x) * Mathf.Rad2Deg;
-         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
 
-         if (charges > 0)
-         {
-             if (Input.GetKeyDown(KeyCode.Mouse0))
-             {
-                 if (paused)
-                 {
-                     UnPause();
-                 } 
-                 Time.timeScale = 1;
-                 ball.GetComponent<Rigidbody>().AddForce(innerRot.transform.up * force);
-                 charges--;
-                 gm.ChargeUpdate(charges);
-                 paddle.transform.position = paddlePlacement.transform.position;
-                 force = 0;
-                 gm.ForceUpdate(force);
-             }
-         }
+                if (Physics.Raycast(ray, out hit))
+                {
+                    if (hit.transform.gameObject == paddleCollider)
+                    {
+                        grabbed = true;
 
-         if (Input.GetKeyDown(KeyCode.Space))
-         {
-             if (paused)
-             {
-                 UnPause();
-
-
-             }
-             else
-             {
-                 if (pauses > 0)
-                 {
-                     Pause();
-                     pauses--;
-                     gm.PauseUpdate(pauses);
-                 }
-             }
-         } */
-        #endregion
+                    }
+                }
+                gm.playerControl = true;
+            }
+        }
     }
     void LateUpdate()
     {
         gm.ForceUpdate(force);
     }
-    void UnPause()
+    public void Pause()
     {
-        //Time.timeScale = 1;
-        ball.GetComponent<Rigidbody>().velocity = savedVelocity;
-        ball.GetComponent<Rigidbody>().angularVelocity = savedAngularVelocity;
-        ball.GetComponent<Rigidbody>().isKinematic = false;
-        paused = false;
-    }
-    void Pause()
-    {
-       // Time.timeScale = 0;
-        paused = true;
-        savedVelocity = ball.GetComponent<Rigidbody>().velocity;
-        savedAngularVelocity = ball.GetComponent<Rigidbody>().angularVelocity;
-        ball.GetComponent<Rigidbody>().isKinematic = true;
+        
+        if (!paused)
+        {
+            savedVelocity = ball.GetComponent<Rigidbody>().velocity;
+            savedAngularVelocity = ball.GetComponent<Rigidbody>().angularVelocity;
+            ball.GetComponent<Rigidbody>().isKinematic = true;
+            pauses++;
+            gm.PauseUpdate(pauses);
+            paused = true;
+        }
+        else
+        {
+            ball.GetComponent<Rigidbody>().velocity = savedVelocity;
+            ball.GetComponent<Rigidbody>().angularVelocity = savedAngularVelocity;
+            ball.GetComponent<Rigidbody>().isKinematic = false;
+            paused = false;
+        }
     }
     IEnumerator MoveFunctionFast()
     {
