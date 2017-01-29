@@ -1,21 +1,39 @@
 fileFormatVersion: 2
-guid: 788e86391a096c74c8669d8228c4b3da
-timeCreated: 1485647938
+guid: ee79c02e698e4534b956e0ec9ecdc54b
+timeCreated: 1485660287
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: StrikeEnergy_0
-    21300002: StrikeEnergy_1
-    21300004: StrikeEnergy_2
-    21300006: StrikeEnergy_3
-    21300008: StrikeEnergy_4
-    21300010: StrikeEnergy_5
-    21300012: StrikeEnergy_6
-    21300014: StrikeEnergy_7
-    21300016: StrikeEnergy_8
-    21300018: StrikeEnergy_9
-    21300020: StrikeEnergy_10
-    21300022: StrikeEnergy_11
+    21300000: PaddleFlyAndHit_0
+    21300002: PaddleFlyAndHit_1
+    21300004: PaddleFlyAndHit_2
+    21300006: PaddleFlyAndHit_3
+    21300008: PaddleFlyAndHit_4
+    21300010: PaddleFlyAndHit_5
+    21300012: PaddleFlyAndHit_6
+    21300014: PaddleFlyAndHit_7
+    21300016: PaddleFlyAndHit_8
+    21300018: PaddleFlyAndHit_9
+    21300020: PaddleFlyAndHit_10
+    21300022: PaddleFlyAndHit_11
+    21300024: PaddleFlyAndHit_12
+    21300026: PaddleFlyAndHit_13
+    21300028: PaddleFlyAndHit_14
+    21300030: PaddleFlyAndHit_15
+    21300032: PaddleFlyAndHit_16
+    21300034: PaddleFlyAndHit_17
+    21300036: PaddleFlyAndHit_18
+    21300038: PaddleFlyAndHit_19
+    21300040: PaddleFlyAndHit_20
+    21300042: PaddleFlyAndHit_21
+    21300044: PaddleFlyAndHit_22
+    21300046: PaddleFlyAndHit_23
+    21300048: PaddleFlyAndHit_24
+    21300050: PaddleFlyAndHit_25
+    21300052: PaddleFlyAndHit_26
+    21300054: PaddleFlyAndHit_27
+    21300056: PaddleFlyAndHit_28
+    21300058: PaddleFlyAndHit_29
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -65,156 +83,143 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: StrikeEnergy_0
+      name: PaddleFlyAndHit_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 192
-        width: 64
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        y: 384
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: StrikeEnergy_1
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 192
-        width: 64
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: StrikeEnergy_2
+      name: PaddleFlyAndHit_1
       rect:
         serializedVersion: 2
         x: 128
-        y: 192
-        width: 64
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        y: 384
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: StrikeEnergy_3
+      name: PaddleFlyAndHit_2
       rect:
         serializedVersion: 2
-        x: 192
-        y: 192
-        width: 64
-        height: 64
+        x: 256
+        y: 384
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PaddleFlyAndHit_3
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 384
+        width: 128
+        height: 128
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: StrikeEnergy_4
+      name: PaddleFlyAndHit_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PaddleFlyAndHit_5
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 256
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PaddleFlyAndHit_6
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 256
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PaddleFlyAndHit_7
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 256
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PaddleFlyAndHit_8
       rect:
         serializedVersion: 2
         x: 0
         y: 128
-        width: 64
-        height: 64
+        width: 128
+        height: 128
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: StrikeEnergy_5
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 128
-        width: 64
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: StrikeEnergy_6
+      name: PaddleFlyAndHit_9
       rect:
         serializedVersion: 2
         x: 128
         y: 128
-        width: 64
-        height: 64
+        width: 128
+        height: 128
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: StrikeEnergy_7
+      name: PaddleFlyAndHit_10
       rect:
         serializedVersion: 2
-        x: 192
+        x: 256
         y: 128
-        width: 64
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: StrikeEnergy_8
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 64
-        width: 64
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: StrikeEnergy_9
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 64
-        width: 64
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: StrikeEnergy_10
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 64
-        width: 64
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: StrikeEnergy_11
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 64
-        width: 64
-        height: 64
+        width: 128
+        height: 128
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

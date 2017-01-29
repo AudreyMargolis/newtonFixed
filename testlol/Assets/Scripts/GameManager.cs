@@ -102,6 +102,8 @@ public class GameManager : MySingleton<GameManager>
         
         if (charges < startCharge)
             lvlscore -= 25;
+        if (charges <= 0)
+            playerControl = false;
 
     }
    public void PauseUpdate(int pauses)
