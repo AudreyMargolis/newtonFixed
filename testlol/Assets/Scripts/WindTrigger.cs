@@ -7,17 +7,29 @@ public class WindTrigger : MonoBehaviour
     public WindDirection windDir;
     public float windForce;
     bool isRunning;
+    public string textureName = "_MainTex";
+    public GameObject plane1, plane2;
+    public Vector2 uvAnimationRate = new Vector2(0.0f, 1.0f);
+    Vector2 uvOffset = Vector2.zero;
+    float scrollSpeed = 0.25f;
+    Renderer myRenderer1, myRenderer2;
+
 	// Use this for initialization
 	void Start ()
     {
         isRunning = false;
-	}
+        myRenderer1 = plane1.GetComponent<Renderer>();
+        myRenderer2 = plane2.GetComponent<Renderer>();
+
+    }
 	
 	// Update is called once per frame
-	void Update ()
+	void FixedUpdate ()
     {
-	
-	}
+        uvOffset += (uvAnimationRate * Time.deltaTime);
+        myRenderer1.material.SetTextureOffset(textureName, uvOffset);
+        myRenderer2.material.SetTextureOffset(textureName, uvOffset);
+    }
     void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Ball")
