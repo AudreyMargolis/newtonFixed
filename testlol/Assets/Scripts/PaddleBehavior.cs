@@ -25,7 +25,8 @@ public class PaddleBehavior : MonoBehaviour {
 
     bool isRunning = false;
     bool isFiring = false;
-    AudioSource audio;
+    public AudioSource audio1, audio2;
+    
 
     // Use this for initialization
     void Start () {
@@ -35,7 +36,7 @@ public class PaddleBehavior : MonoBehaviour {
         Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
         Pause();
         maxForce = 1500;
-        audio = GetComponent<AudioSource>();
+        //audio = GetComponent<AudioSource>();
         pauses = 0;
     }
 
@@ -44,8 +45,10 @@ public class PaddleBehavior : MonoBehaviour {
     {
         if (gm.playerControl)
         {
-            audio.pitch = (force / 1500f) + 0.3f;
-            audio.volume = (force / 1500f) + 0.3f;
+            audio1.pitch = (force / 1500f) + 0.3f;
+            audio1.volume = (force / 1500f) + 0.3f;
+            audio2.pitch = (force / 1500f) + 0.3f;
+            audio2.volume = (force / 1500f) + 0.3f;
             if (grabbed)
             {
                 if (tetherSprite.activeSelf == true)
@@ -193,7 +196,7 @@ public class PaddleBehavior : MonoBehaviour {
         while (Vector3.Distance(transform.position, lerpTarget.transform.position) > .1f)
         {
            
-            if(Vector3.Distance(transform.position, lerpTarget.transform.position) < 2f)
+            if(Vector3.Distance(transform.position, lerpTarget.transform.position) < 2.5f)
                 firingSprite.GetComponent<Animator>().SetBool("CanFire", true);
             yield return null;
         }

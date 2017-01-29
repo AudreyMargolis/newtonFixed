@@ -129,7 +129,7 @@ Material:
       second: 0
     - first:
         name: _Exposure
-      second: 0.36
+      second: 1
     - first:
         name: _GlossMapScale
       second: 1
@@ -153,7 +153,7 @@ Material:
       second: 0.02
     - first:
         name: _Rotation
-      second: 256
+      second: 360
     - first:
         name: _SmoothnessTextureChannel
       second: 0
@@ -190,4 +190,4 @@ Material:
       second: {r: 0.4044118, g: 0.4578092, b: 1, a: 1}
     - first:
         name: _Tint
-      second: {r: 0.43382353, g: 0.4611561, b: 1, a: 0.5}
+      second: {r: 0.40484428, g: 0.5665493, b: 0.5735294, a: 0.5}

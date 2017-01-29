@@ -49,10 +49,7 @@ public class MainMenu : MonoBehaviour
     }
     IEnumerator LevelLoad(int level)
     {
-        while (audio.isPlaying)
-        {
-            yield return null;
-        }
+        yield return new WaitForSeconds(0.5f);
         GameManager a = (GameManager)FindObjectOfType(typeof(GameManager));
         a.LevelLoad(level);
     }

@@ -109,7 +109,7 @@ public class GameManager : MySingleton<GameManager>
     }
    public void PauseUpdate(int pauses)
     {
-        if (pauses > 2)
+        if (pauses > 2 + bonusPauses)
             lvlscore -= 50;
     }
     public void ForceUpdate(float force)
@@ -124,15 +124,18 @@ public class GameManager : MySingleton<GameManager>
             Debug.Log(force/ 1500);
         }
     }
-    public void LoadLevelAfterQuiz(int bonus)
+    public void LoadLevelAfterQuiz(bool right)
     {
-        if (bonus == 2)
+        if (right)
         {
-            bonusCharges = 1;
+            bonusCharges = 2;
             bonusPauses = 1;
         }
-        else if (bonus == 1)
-            bonusCharges = 1;
+        else
+        {
+            bonusCharges = 0;
+            bonusPauses = 0;
+        }
 
         int nextScene = SceneManager.GetActiveScene().buildIndex + 1;
         SceneManager.LoadScene(nextScene);
