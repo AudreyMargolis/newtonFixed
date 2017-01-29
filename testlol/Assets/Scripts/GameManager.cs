@@ -15,7 +15,7 @@ public class GameManager : MySingleton<GameManager>
     public int lvlCharges, lvlPauses, bonusCharges, bonusPauses, startCharge, startPause, maxForce;
     public GameObject forceUI, chargeUI,chargeUIBar, pauseUI, winUI;
     public GameObject paddle;
-    public bool playerControl;
+    public bool playerControl,tutorialMode;
     bool isPlaying;
 
     // Use this for initialization
@@ -38,6 +38,7 @@ public class GameManager : MySingleton<GameManager>
     {
         lvlscore = 1000;
         playerControl = false;
+        tutorialMode = false;
         InvokeRepeating("LessenScore", 1.0f, 1.0f);
         if (forceUI == null)
             forceUI = GameObject.Find("forceText");

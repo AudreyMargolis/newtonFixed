@@ -128,19 +128,21 @@ public class PaddleBehavior : MonoBehaviour {
         {
             if (Input.GetMouseButtonDown(0))
             {
-
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-
-                if (Physics.Raycast(ray, out hit))
+                if (!gm.tutorialMode)
                 {
-                    if (hit.transform.gameObject == paddleCollider)
-                    {
-                        grabbed = true;
+                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    RaycastHit hit;
 
+                    if (Physics.Raycast(ray, out hit))
+                    {
+                        if (hit.transform.gameObject == paddleCollider)
+                        {
+                            grabbed = true;
+
+                        }
                     }
+                    gm.playerControl = true;
                 }
-                gm.playerControl = true;
             }
         }
     }
