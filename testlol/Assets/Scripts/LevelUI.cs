@@ -21,7 +21,10 @@ public class LevelUI : MonoBehaviour {
     {
         winUI.SetActive(true);
         statsPanel.SetActive(false);
-        scoreUI.GetComponent<Text>().text = "Level Score " + lvlscore;
+        if(lvlscore == 0)
+            scoreUI.GetComponent<Text>().text = "FAILED";
+        else
+            scoreUI.GetComponent<Text>().text = "Level Score " + lvlscore;
       //  Cursor.visible = true;
        // Cursor.lockState = CursorLockMode.None;
     }

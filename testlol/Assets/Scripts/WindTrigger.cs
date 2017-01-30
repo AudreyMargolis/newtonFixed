@@ -32,7 +32,7 @@ public class WindTrigger : MonoBehaviour
     }
     void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Ball")
+        if (other.gameObject.GetComponent<Rigidbody>().isKinematic == false)
         {
             if(!isRunning)
             StartCoroutine(Wind(other.gameObject));

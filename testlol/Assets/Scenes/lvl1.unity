@@ -368,41 +368,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114000013634574824, guid: cad97bd486969994a84636ba91deddce,
-        type: 2}
-      propertyPath: camPosition
-      value: 
-      objectReference: {fileID: 468696302}
-    - target: {fileID: 114000013634574824, guid: cad97bd486969994a84636ba91deddce,
-        type: 2}
-      propertyPath: toIndicate
-      value: 
-      objectReference: {fileID: 688447178}
-    - target: {fileID: 114000013580224422, guid: cad97bd486969994a84636ba91deddce,
-        type: 2}
-      propertyPath: camPosition
-      value: 
-      objectReference: {fileID: 65175545}
-    - target: {fileID: 114000013580224422, guid: cad97bd486969994a84636ba91deddce,
-        type: 2}
-      propertyPath: toIndicate
-      value: 
-      objectReference: {fileID: 2028686207}
-    - target: {fileID: 114000012507021842, guid: cad97bd486969994a84636ba91deddce,
-        type: 2}
-      propertyPath: mainCam
-      value: 
-      objectReference: {fileID: 718747466}
-    - target: {fileID: 114000011742273946, guid: cad97bd486969994a84636ba91deddce,
-        type: 2}
-      propertyPath: camPosition
-      value: 
-      objectReference: {fileID: 1289545489}
-    - target: {fileID: 114000011742273946, guid: cad97bd486969994a84636ba91deddce,
-        type: 2}
-      propertyPath: toIndicate
-      value: 
-      objectReference: {fileID: 2028686207}
     - target: {fileID: 114000010561859260, guid: cad97bd486969994a84636ba91deddce,
         type: 2}
       propertyPath: camPosition
@@ -413,6 +378,41 @@ Prefab:
       propertyPath: toIndicate
       value: 
       objectReference: {fileID: 558473530}
+    - target: {fileID: 114000011742273946, guid: cad97bd486969994a84636ba91deddce,
+        type: 2}
+      propertyPath: camPosition
+      value: 
+      objectReference: {fileID: 1289545489}
+    - target: {fileID: 114000011742273946, guid: cad97bd486969994a84636ba91deddce,
+        type: 2}
+      propertyPath: toIndicate
+      value: 
+      objectReference: {fileID: 2028686207}
+    - target: {fileID: 114000012507021842, guid: cad97bd486969994a84636ba91deddce,
+        type: 2}
+      propertyPath: mainCam
+      value: 
+      objectReference: {fileID: 718747466}
+    - target: {fileID: 114000013580224422, guid: cad97bd486969994a84636ba91deddce,
+        type: 2}
+      propertyPath: camPosition
+      value: 
+      objectReference: {fileID: 65175545}
+    - target: {fileID: 114000013580224422, guid: cad97bd486969994a84636ba91deddce,
+        type: 2}
+      propertyPath: toIndicate
+      value: 
+      objectReference: {fileID: 2028686207}
+    - target: {fileID: 114000013634574824, guid: cad97bd486969994a84636ba91deddce,
+        type: 2}
+      propertyPath: camPosition
+      value: 
+      objectReference: {fileID: 468696302}
+    - target: {fileID: 114000013634574824, guid: cad97bd486969994a84636ba91deddce,
+        type: 2}
+      propertyPath: toIndicate
+      value: 
+      objectReference: {fileID: 688447178}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cad97bd486969994a84636ba91deddce, type: 2}
   m_IsPrefabParent: 0
@@ -1383,6 +1383,7 @@ GameObject:
   - 114: {fileID: 718747475}
   - 114: {fileID: 718747474}
   - 82: {fileID: 718747477}
+  - 114: {fileID: 718747478}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1618,6 +1619,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &718747478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 718747466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e0f2b764c2e0074fabf27e9a1a17b04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &720554013
 GameObject:
   m_ObjectHideFlags: 0

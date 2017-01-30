@@ -79,9 +79,20 @@ public class GameManager : MySingleton<GameManager>
     {
         isPlaying = false;
         lvlscore = lvlscore * mod;
+        paddle.GetComponent<PaddleBehavior>().scored = true;
         LevelUI ui = (LevelUI)FindObjectOfType(typeof(LevelUI));
         ui.WinScreen(lvlscore);
         
+        //LOLSDK.Instance.CompleteGame();
+    }
+    public void Fail()
+    {
+        isPlaying = false;
+        //lvlscore = lvlscore * mod;
+        lvlscore = 0;
+        LevelUI ui = (LevelUI)FindObjectOfType(typeof(LevelUI));
+        ui.WinScreen(lvlscore);
+
         //LOLSDK.Instance.CompleteGame();
     }
     public void Reload()

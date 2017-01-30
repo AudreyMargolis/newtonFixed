@@ -5,7 +5,7 @@ public class PaddleBehavior : MonoBehaviour {
     public int charges;
     int pauses;
     public float force;
-    public GameObject  gameManage, ball;
+    public GameObject gameManage, ball;
     public GameObject paddleCollider, lerpTarget;
     GameManager gm;
     public float rotSpeed = 10f;
@@ -22,15 +22,15 @@ public class PaddleBehavior : MonoBehaviour {
     public GameObject tetherSprite;
     public GameObject firingSprite;
     GameObject tempTether, tempFiring;
-
+    public bool scored = false;
     bool isRunning = false;
     bool isFiring = false;
     public AudioSource audio1, audio2;
-    
+
 
     // Use this for initialization
-    void Start () {
-        gm = (GameManager) FindObjectOfType(typeof(GameManager));
+    void Start() {
+        gm = (GameManager)FindObjectOfType(typeof(GameManager));
         gm.ChargeUpdate(charges);
         //gm.PauseUpdate(pauses);
         Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
@@ -38,6 +38,7 @@ public class PaddleBehavior : MonoBehaviour {
         maxForce = 1500;
         //audio = GetComponent<AudioSource>();
         pauses = 0;
+        scored = false;
     }
 
     // Update is called once per frame
@@ -53,6 +54,7 @@ public class PaddleBehavior : MonoBehaviour {
             {
                 if (tetherSprite.activeSelf == true)
                     StartCoroutine(ExitTether());
+                
                 Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 15);
                 Vector3 lookPos = Camera.main.ScreenToWorldPoint(mousePos);
                 transform.parent = null;
@@ -74,15 +76,14 @@ public class PaddleBehavior : MonoBehaviour {
                     //apply forcestuff here
                     if (paused)
                         Pause();
-                    if (charges > 0)
+                    if (charges >= 0)
                     {
                         firingSprite.SetActive(true);
                         StartCoroutine(Fire(force));
-                       
+
                         force = 0;
                         charges--;
                         gm.ChargeUpdate(charges);
-
                         grabbed = false;
                     }
                 }
@@ -122,10 +123,12 @@ public class PaddleBehavior : MonoBehaviour {
                     transform.parent = ball.transform;
                 }
             }
+
             Vector3 lookTo = ball.transform.position;
             lookTo = lookTo - transform.position;
             float angle = Mathf.Atan2(lookTo.y, lookTo.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+           
         }
         else
         {
@@ -148,6 +151,28 @@ public class PaddleBehavior : MonoBehaviour {
                 }
             }
         }
+    }
+    IEnumerator Fail()
+    {
+       
+        gm.playerControl = false;
+        yield return new WaitForSeconds(5f);
+        if (!scored)
+        {
+            gm.tutorialMode = true;
+            Rigidbody rm = gameObject.GetComponent<Rigidbody>();
+            //rm.useGravity = false;
+            rm.isKinematic = false;
+            rm.angularVelocity = ball.GetComponent<Rigidbody>().angularVelocity;
+            rm.velocity = ball.GetComponent<Rigidbody>().velocity;
+            rm.freezeRotation = true;
+            rm.AddForce(-transform.up);
+            gameObject.AddComponent<BoxCollider>();
+
+            yield return new WaitForSeconds(2f);
+            gm.Fail();
+        }
+
     }
     void LateUpdate()
     {
@@ -205,6 +230,10 @@ public class PaddleBehavior : MonoBehaviour {
         ball.GetComponent<Rigidbody>().AddForce(transform.right * fireForce);
         yield return new WaitForSeconds(0.3f);
         firingSprite.SetActive(false);
+        if(charges ==0)
+        {
+            StartCoroutine(Fail());
+        }
         isFiring = false;
 
     }
