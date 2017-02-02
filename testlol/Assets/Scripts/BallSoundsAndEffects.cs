@@ -21,7 +21,7 @@ public class BallSoundsAndEffects : MonoBehaviour {
         Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
         Vector3 pos = contact.point;
 
-        if (gameObject.GetComponent<Rigidbody>().velocity.magnitude < 5)
+        if (gameObject.GetComponent<Rigidbody2D>().velocity.magnitude < 5)
             Instantiate(sparkMid, pos, rot);
         else
         {

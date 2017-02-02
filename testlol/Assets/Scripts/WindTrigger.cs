@@ -32,7 +32,7 @@ public class WindTrigger : MonoBehaviour
     }
     void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.GetComponent<Rigidbody>().isKinematic == false)
+        if (other.gameObject.GetComponent<Rigidbody2D>().isKinematic == false)
         {
             if(!isRunning)
             StartCoroutine(Wind(other.gameObject));
@@ -42,13 +42,13 @@ public class WindTrigger : MonoBehaviour
     {
         isRunning = true;
             if (windDir == WindDirection.UP)
-                other.GetComponent<Rigidbody>().AddForce(new Vector3(0, 1, 0) * windForce);
+                other.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 1) * windForce);
             if (windDir == WindDirection.LEFT)
-                other.GetComponent<Rigidbody>().AddForce(new Vector3(1, 0, 0) * windForce);
+                other.GetComponent<Rigidbody2D>().AddForce(new Vector2(1, 0) * windForce);
             if (windDir == WindDirection.RIGHT)
-                other.GetComponent<Rigidbody>().AddForce(new Vector3(-1, 0, 0) * windForce);
+                other.GetComponent<Rigidbody2D>().AddForce(new Vector2(-1, 0) * windForce);
             if (windDir == WindDirection.DOWN)
-                other.GetComponent<Rigidbody>().AddForce(new Vector3(0, -1, 0) * windForce);
+                other.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, -1) * windForce);
             yield return new WaitForSeconds(0.1f);
         isRunning = false;
     }

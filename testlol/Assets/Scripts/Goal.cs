@@ -27,12 +27,12 @@ public class Goal : MonoBehaviour
     {
 	
 	}
-    void OnTriggerStay (Collider other)
+    void OnTriggerStay2D (Collider2D other)
     {
         if (other.gameObject.tag == "Ball")
         {
-            Vector3 velocity = other.gameObject.GetComponent<Rigidbody>().velocity;
-            if (Vector3.Distance(velocity, Vector3.zero) <= .3f)
+            Vector2 velocity = other.gameObject.GetComponent<Rigidbody2D>().velocity;
+            if (Vector2.Distance(velocity, Vector2.zero) <= .3f)
             {
                 if (!scored)
                 {

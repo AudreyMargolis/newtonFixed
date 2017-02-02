@@ -5,11 +5,11 @@ using System.Collections;
 public class compass : MonoBehaviour
 {
     public GameObject ball,magText,paddle;
-    Rigidbody ballrb;
+    Rigidbody2D ballrb;
 	// Use this for initialization
 	void Start ()
     {
-        ballrb = ball.GetComponent<Rigidbody>();
+        ballrb = ball.GetComponent<Rigidbody2D>();
 	}
 	
 	// Update is called once per frame

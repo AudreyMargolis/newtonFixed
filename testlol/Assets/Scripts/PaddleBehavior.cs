@@ -11,8 +11,8 @@ public class PaddleBehavior : MonoBehaviour {
     public float rotSpeed = 10f;
     float lerpSpeed = 5f;
     public bool paused = false, grabbed = false;
-    Vector3 savedVelocity;
-    Vector3 savedAngularVelocity;
+    Vector2 savedVelocity;
+    float savedAngularVelocity;
     public int maxForce = 1500;
 
     public Texture2D cursorTexture;
@@ -54,7 +54,7 @@ public class PaddleBehavior : MonoBehaviour {
             {
                 if (tetherSprite.activeSelf == true)
                     StartCoroutine(ExitTether());
-                
+               
                 Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 15);
                 Vector3 lookPos = Camera.main.ScreenToWorldPoint(mousePos);
                 transform.parent = null;
@@ -70,13 +70,13 @@ public class PaddleBehavior : MonoBehaviour {
                     force = maxForce;
                 force = Mathf.Round(force * 100f) / 100f;
 
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonUp(0))
                 {
 
                     //apply forcestuff here
                     if (paused)
                         Pause();
-                    if (charges >= 0)
+                    if (charges > 0)
                     {
                         firingSprite.SetActive(true);
                         StartCoroutine(Fire(force));
@@ -160,14 +160,14 @@ public class PaddleBehavior : MonoBehaviour {
         if (!scored)
         {
             gm.tutorialMode = true;
-            Rigidbody rm = gameObject.GetComponent<Rigidbody>();
+            Rigidbody2D rm = gameObject.GetComponent<Rigidbody2D>();
             //rm.useGravity = false;
             rm.isKinematic = false;
-            rm.angularVelocity = ball.GetComponent<Rigidbody>().angularVelocity;
-            rm.velocity = ball.GetComponent<Rigidbody>().velocity;
+            rm.angularVelocity = ball.GetComponent<Rigidbody2D>().angularVelocity;
+            rm.velocity = ball.GetComponent<Rigidbody2D>().velocity;
             rm.freezeRotation = true;
             rm.AddForce(-transform.up);
-            gameObject.AddComponent<BoxCollider>();
+            gameObject.AddComponent<BoxCollider2D>();
 
             yield return new WaitForSeconds(2f);
             gm.Fail();
@@ -183,18 +183,18 @@ public class PaddleBehavior : MonoBehaviour {
         
         if (!paused)
         {
-            savedVelocity = ball.GetComponent<Rigidbody>().velocity;
-            savedAngularVelocity = ball.GetComponent<Rigidbody>().angularVelocity;
-            ball.GetComponent<Rigidbody>().isKinematic = true;
+            savedVelocity = ball.GetComponent<Rigidbody2D>().velocity;
+            savedAngularVelocity = ball.GetComponent<Rigidbody2D>().angularVelocity;
+            ball.GetComponent<Rigidbody2D>().isKinematic = true;
             pauses++;
             gm.PauseUpdate(pauses);
             paused = true;
         }
         else
         {
-            ball.GetComponent<Rigidbody>().velocity = savedVelocity;
-            ball.GetComponent<Rigidbody>().angularVelocity = savedAngularVelocity;
-            ball.GetComponent<Rigidbody>().isKinematic = false;
+            ball.GetComponent<Rigidbody2D>().velocity = savedVelocity;
+            ball.GetComponent<Rigidbody2D>().angularVelocity = savedAngularVelocity;
+            ball.GetComponent<Rigidbody2D>().isKinematic = false;
             paused = false;
         }
     }
@@ -227,10 +227,10 @@ public class PaddleBehavior : MonoBehaviour {
         }
 
 
-        ball.GetComponent<Rigidbody>().AddForce(transform.right * fireForce);
+        ball.GetComponent<Rigidbody2D>().AddForce(transform.right * fireForce);
         yield return new WaitForSeconds(0.3f);
         firingSprite.SetActive(false);
-        if(charges ==0)
+        if(charges <= 0)
         {
             StartCoroutine(Fail());
         }
