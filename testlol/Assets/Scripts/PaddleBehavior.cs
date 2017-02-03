@@ -55,12 +55,12 @@ public class PaddleBehavior : MonoBehaviour {
                 if (tetherSprite.activeSelf == true)
                     StartCoroutine(ExitTether());
                
-                Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 15);
-                Vector3 lookPos = Camera.main.ScreenToWorldPoint(mousePos);
-                transform.parent = null;
-                transform.position = new Vector3(lookPos.x, lookPos.y, transform.position.z);
+                //Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 15);
+               // Vector3 lookPos = Camera.main.ScreenToWorldPoint(mousePos);
+                //transform.parent = null;
+                //transform.position = new Vector3(lookPos.x, lookPos.y, transform.position.z);
 
-                if (Vector3.Distance(transform.position, lerpTarget.transform.position) < 1f)
+               /* if (Vector3.Distance(transform.position, lerpTarget.transform.position) < 1f)
                     force = Vector3.Distance(transform.position, ball.transform.position) * 50;
                 else if (Vector3.Distance(transform.position, lerpTarget.transform.position) < 2f && Vector3.Distance(transform.position, lerpTarget.transform.position) > 1f)
                     force = Vector3.Distance(transform.position, ball.transform.position) * 100;
@@ -68,24 +68,33 @@ public class PaddleBehavior : MonoBehaviour {
                     force = Vector3.Distance(transform.position, ball.transform.position) * 150;
                 if (force > maxForce)
                     force = maxForce;
-                force = Mathf.Round(force * 100f) / 100f;
+                force = Mathf.Round(force * 100f) / 100f;*/
 
-                if (Input.GetMouseButtonUp(0))
+                if (Input.GetMouseButtonDown(0))
                 {
+                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    RaycastHit hit;
 
-                    //apply forcestuff here
-                    if (paused)
-                        Pause();
-                    if (charges > 0)
-                    {
-                        firingSprite.SetActive(true);
-                        StartCoroutine(Fire(force));
+                    if (Physics.Raycast(ray, out hit))
+                        {
+                            if (hit.transform.gameObject == paddleCollider)
+                            {
+                                if (paused)
+                                    Pause();
+                                if (charges > 0)
+                                {
+                                    firingSprite.SetActive(true);
+                                    StartCoroutine(Fire(force));
 
-                        force = 0;
-                        charges--;
-                        gm.ChargeUpdate(charges);
-                        grabbed = false;
-                    }
+                                    force = 0;
+                                    charges--;
+                                    gm.ChargeUpdate(charges);
+                                    grabbed = false;
+                                }
+                            }
+                        }
+                            //apply forcestuff here
+                         
                 }
             }
             if (!grabbed)

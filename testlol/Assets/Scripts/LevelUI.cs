@@ -48,6 +48,11 @@ public class LevelUI : MonoBehaviour {
 
         StartCoroutine(LevelLoad(right));
     }
+    public void UpdateForceFill(float force)
+    {
+        GameManager gm = (GameManager)FindObjectOfType(typeof(GameManager));
+        gm.ForceUpdate(force);
+    }
     IEnumerator LevelLoad(bool right)
     {
         yield return new WaitForSeconds(0.5f);

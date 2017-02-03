@@ -17,6 +17,7 @@ public class GameManager : MySingleton<GameManager>
     public GameObject paddle;
     public bool playerControl,tutorialMode;
     bool isPlaying;
+    public GameObject forceSlider;
 
     // Use this for initialization
     void Awake()
@@ -48,14 +49,16 @@ public class GameManager : MySingleton<GameManager>
             chargeUI = GameObject.Find("chargeText");
         if (chargeUI != null)
             chargeText = chargeUI.GetComponent<Text>();
+        if (forceSlider == null)
+            forceSlider = GameObject.Find("forceSlider");
        // if (pauseUI == null)
         //    pauseUI = GameObject.Find("pauseText");
        // if (pauseUI != null)
            // pauseText = pauseUI.GetComponent<Text>();
-        if(chargeUIBar == null)
-            chargeUIBar = GameObject.Find("chargeMid");
-        if (chargeUIBar != null)
-            chargeFill = chargeUIBar.GetComponent<Image>();
+      //  if(chargeUIBar == null)
+          //  chargeUIBar = GameObject.Find("chargeMid");
+       // if (chargeUIBar != null)
+          //  chargeFill = chargeUIBar.GetComponent<Image>();
         if (paddle == null)
             paddle = GameObject.Find("PaddleRoot");
         if (paddle != null)
@@ -126,14 +129,19 @@ public class GameManager : MySingleton<GameManager>
     public void ForceUpdate(float force)
     {
         forceText.text = "Force " + force.ToString("0000.00") + " N";
-       
-        if (force == 0)
-            chargeFill.fillAmount = force / 1500f;
-        else
-        {
-            chargeFill.fillAmount = force / 1500f;
-            Debug.Log(force/ 1500);
-        }
+        paddle.GetComponent<PaddleBehavior>().force = force;
+      //  if (force == 0)
+        ///    chargeFill.fillAmount = force / 1500f;
+       // else
+       // {
+         //   chargeFill.fillAmount = force / 1500f;
+         //   Debug.Log(force/ 1500);
+       // }
+    }
+    public void Fire()
+    {
+        forceSlider.GetComponent<Slider>().value = 0;
+        paddle.GetComponent<PaddleBehavior>().force = 0;
     }
     public void LoadLevelAfterQuiz(bool right)
     {
