@@ -57,7 +57,7 @@ public class GameManager : MySingleton<GameManager>
         if (chargeUIBar != null)
             chargeFill = chargeUIBar.GetComponent<Image>();
         if (paddle == null)
-            paddle = GameObject.Find("PaddleRoot");
+            paddle = GameObject.Find("Paddle");
         if (paddle != null)
         {
             if (SceneManager.GetActiveScene().buildIndex != 1)

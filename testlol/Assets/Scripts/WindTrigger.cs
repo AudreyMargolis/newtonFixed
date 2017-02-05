@@ -30,9 +30,9 @@ public class WindTrigger : MonoBehaviour
         myRenderer1.material.SetTextureOffset(textureName, uvOffset);
         myRenderer2.material.SetTextureOffset(textureName, uvOffset);
     }
-    void OnTriggerStay(Collider other)
+    void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.GetComponent<Rigidbody2D>().isKinematic == false)
+        if (other.gameObject.GetComponent<Rigidbody2D>())
         {
             if(!isRunning)
             StartCoroutine(Wind(other.gameObject));

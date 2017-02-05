@@ -54,11 +54,23 @@ public class PaddleBehavior : MonoBehaviour {
             {
                 if (tetherSprite.activeSelf == true)
                     StartCoroutine(ExitTether());
-               
-                Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 15);
-                Vector3 lookPos = Camera.main.ScreenToWorldPoint(mousePos);
-                transform.parent = null;
-                transform.position = new Vector3(lookPos.x, lookPos.y, transform.position.z);
+                if (Input.GetMouseButton(0))
+                {
+                    Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 15);
+                    Vector3 lookPos = Camera.main.ScreenToWorldPoint(mousePos);
+                    transform.parent = null;
+                    transform.position = new Vector3(lookPos.x, lookPos.y, transform.position.z);
+                }
+                if(Input.touchCount > 0)
+                {
+                    if(Input.GetTouch(0).phase == TouchPhase.Moved)
+                    {
+                        Vector3 mousePos = new Vector3(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y, 15);
+                        Vector3 lookPos = Camera.main.ScreenToWorldPoint(mousePos);
+                        transform.parent = null;
+                        transform.position = new Vector3(lookPos.x, lookPos.y, transform.position.z);
+                    }
+                }
 
                 if (Vector3.Distance(transform.position, lerpTarget.transform.position) < 1f)
                     force = Vector3.Distance(transform.position, ball.transform.position) * 50;
@@ -87,6 +99,24 @@ public class PaddleBehavior : MonoBehaviour {
                         grabbed = false;
                     }
                 }
+                if(Input.touchCount>0)
+                {
+                    if(Input.GetTouch(0).phase == TouchPhase.Ended)
+                    {
+                        if (paused)
+                            Pause();
+                        if (charges > 0)
+                        {
+                            firingSprite.SetActive(true);
+                            StartCoroutine(Fire(force));
+
+                            force = 0;
+                            charges--;
+                            gm.ChargeUpdate(charges);
+                            grabbed = false;
+                        }
+                    }
+                }
             }
             if (!grabbed)
             {
@@ -102,6 +132,24 @@ public class PaddleBehavior : MonoBehaviour {
                         {
                             grabbed = true;
 
+                        }
+                    }
+                }
+                if(Input.touchCount >0)
+                {
+                    if(Input.GetTouch(0).phase == TouchPhase.Began)
+                    {
+
+                        Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+                        RaycastHit hit;
+
+                        if (Physics.Raycast(ray, out hit))
+                        {
+                            if (hit.transform.gameObject == paddleCollider)
+                            {
+                                grabbed = true;
+
+                            }
                         }
                     }
                 }
@@ -148,6 +196,27 @@ public class PaddleBehavior : MonoBehaviour {
                         }
                     }
                     gm.playerControl = true;
+                }
+            }
+            if(Input.touchCount > 0)
+            {
+                if(Input.GetTouch(0).phase == TouchPhase.Began)
+                {
+                    if (!gm.tutorialMode)
+                    {
+                        Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+                        RaycastHit hit;
+
+                        if (Physics.Raycast(ray, out hit))
+                        {
+                            if (hit.transform.gameObject == paddleCollider)
+                            {
+                                grabbed = true;
+
+                            }
+                        }
+                        gm.playerControl = true;
+                    }
                 }
             }
         }
