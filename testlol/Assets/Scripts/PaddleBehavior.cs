@@ -19,9 +19,9 @@ public class PaddleBehavior : MonoBehaviour {
     public CursorMode cursorMode = CursorMode.Auto;
     public Vector2 hotSpot = Vector2.zero;
 
-    public GameObject tetherSprite;
-    public GameObject firingSprite;
-    GameObject tempTether, tempFiring;
+    public GameObject paddleAnimator;
+    PaddleSpriteAnimator animScript;
+    //GameObject tempTether, tempFiring;
     public bool scored = false;
     bool isRunning = false;
     bool isFiring = false;
@@ -39,6 +39,8 @@ public class PaddleBehavior : MonoBehaviour {
         //audio = GetComponent<AudioSource>();
         pauses = 0;
         scored = false;
+        animScript = paddleAnimator.GetComponent<PaddleSpriteAnimator>();
+        animScript.StartTether();
     }
 
     // Update is called once per frame
@@ -52,8 +54,8 @@ public class PaddleBehavior : MonoBehaviour {
             audio2.volume = (force / 1500f) + 0.3f;
             if (grabbed)
             {
-                if (tetherSprite.activeSelf == true)
-                    StartCoroutine(ExitTether());
+                if(animScript.tethered)
+                    animScript.ExitTether();
                 if (Input.GetMouseButton(0))
                 {
                     Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 15);
@@ -90,7 +92,7 @@ public class PaddleBehavior : MonoBehaviour {
                         Pause();
                     if (charges > 0)
                     {
-                        firingSprite.SetActive(true);
+                        animScript.StartCharge();
                         StartCoroutine(Fire(force));
 
                         force = 0;
@@ -107,7 +109,7 @@ public class PaddleBehavior : MonoBehaviour {
                             Pause();
                         if (charges > 0)
                         {
-                            firingSprite.SetActive(true);
+                            animScript.StartCharge();
                             StartCoroutine(Fire(force));
 
                             force = 0;
@@ -162,11 +164,9 @@ public class PaddleBehavior : MonoBehaviour {
                 else
                 {
 
-                    if (tetherSprite.activeSelf == false)
+                    if (animScript.tethered == false)
                     {
-                        //tempTether = Instantiate(tetherSprite, transform.position - (transform.forward * 2), Quaternion.Euler(new Vector3(0, 0, transform.rotation.z))) as GameObject;
-                        // tempTether.transform.parent = gameObject.transform;
-                        tetherSprite.SetActive(true);
+                        animScript.StartTether();
                     }
                     transform.parent = ball.transform;
                 }
@@ -229,6 +229,7 @@ public class PaddleBehavior : MonoBehaviour {
         if (!scored)
         {
             gm.tutorialMode = true;
+            animScript.DontAnimate();
             Rigidbody2D rm = gameObject.GetComponent<Rigidbody2D>();
             //rm.useGravity = false;
             rm.isKinematic = false;
@@ -289,16 +290,15 @@ public class PaddleBehavior : MonoBehaviour {
       
         while (Vector3.Distance(transform.position, lerpTarget.transform.position) > .1f)
         {
-           
-            if(Vector3.Distance(transform.position, lerpTarget.transform.position) < 2.5f)
-                firingSprite.GetComponent<Animator>().SetBool("CanFire", true);
+
+            if (Vector3.Distance(transform.position, lerpTarget.transform.position) < 2.5f)
+                animScript.charging = false;
             yield return null;
         }
 
 
         ball.GetComponent<Rigidbody2D>().AddForce(transform.right * fireForce);
         yield return new WaitForSeconds(0.3f);
-        firingSprite.SetActive(false);
         if(charges <= 0)
         {
             StartCoroutine(Fail());
@@ -308,9 +308,9 @@ public class PaddleBehavior : MonoBehaviour {
     }
     IEnumerator ExitTether()
     {
-        tetherSprite.GetComponent<Animator>().SetBool("Close", true);
+        animScript.ExitTether();
         yield return new WaitForSeconds(0.3f);
-        tetherSprite.SetActive(false);
+        animScript.DontAnimate();
     }
    
 }
