@@ -22,7 +22,8 @@ public class GameManager : MySingleton<GameManager>
     void Awake()
     {
         //LOLSDK.Init("com.margolisdesign.projectnewton");
-       
+        Application.targetFrameRate = 30;
+
     }
     void Start ()
     {
@@ -48,10 +49,6 @@ public class GameManager : MySingleton<GameManager>
             chargeUI = GameObject.Find("chargeText");
         if (chargeUI != null)
             chargeText = chargeUI.GetComponent<Text>();
-       // if (pauseUI == null)
-        //    pauseUI = GameObject.Find("pauseText");
-       // if (pauseUI != null)
-           // pauseText = pauseUI.GetComponent<Text>();
         if(chargeUIBar == null)
             chargeUIBar = GameObject.Find("chargeMid");
         if (chargeUIBar != null)
@@ -64,8 +61,6 @@ public class GameManager : MySingleton<GameManager>
             {
                 paddle.GetComponent<PaddleBehavior>().charges += bonusCharges;
                 startCharge = paddle.GetComponent<PaddleBehavior>().charges;
-               // paddle.GetComponent<PaddleBehavior>().pauses += bonusPauses;
-               // startPause = paddle.GetComponent<PaddleBehavior>().pauses;
             }
         }
         

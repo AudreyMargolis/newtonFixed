@@ -1359,9 +1359,9 @@ MonoBehaviour:
   - {fileID: 1673031175}
   - {fileID: 1829973258}
   - {fileID: 716733380}
-  prevMenu: {fileID: 8300000, guid: 022df1ad391941240a81c0bec6cff6b9, type: 3}
-  nextMenu: {fileID: 8300000, guid: 1ade92d4985eca941a94cb16c0443e44, type: 3}
-  buttonClick: {fileID: 8300000, guid: 314132a9a16dbe84a9d16fdb2f2f6c4f, type: 3}
+  prevMenu: {fileID: 8300000, guid: e57b6e4e315c64a49b5166bf42c0ca6b, type: 3}
+  nextMenu: {fileID: 8300000, guid: bedbe57530a5af840b3da7ea1abe2858, type: 3}
+  buttonClick: {fileID: 8300000, guid: 4503ed103d8a7dc43aa4a2ada922951c, type: 3}
 --- !u!82 &169309268
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3024,10 +3024,10 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 37f54bec96a45d14baefe8a57c1976f3, type: 3}
+  m_audioClip: {fileID: 8300000, guid: b8d349f92006854489afc0dc2b01259e, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.3
-  m_Pitch: 1
+  m_Pitch: 0.5
   Loop: 1
   Mute: 0
   Spatialize: 0
@@ -3039,7 +3039,7 @@ AudioSource:
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
-  BypassListenerEffects: 0
+  BypassListenerEffects: 1
   BypassReverbZones: 0
   rolloffCustomCurve:
     serializedVersion: 2

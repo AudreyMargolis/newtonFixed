@@ -14,12 +14,12 @@ public class BallSoundsAndEffects : MonoBehaviour {
 	void Update () {
 	
 	}
-    void OnCollisionEnter(Collision other)
+    void OnCollisionEnter2D(Collision2D other)
     {
         audio.Play();
-        ContactPoint contact = other.contacts[0];
-        Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
-        Vector3 pos = contact.point;
+        ContactPoint2D contact = other.contacts[0];
+        Quaternion rot = Quaternion.FromToRotation(Vector2.up, contact.normal);
+        Vector2 pos = contact.point;
 
         if (gameObject.GetComponent<Rigidbody2D>().velocity.magnitude < 5)
             Instantiate(sparkMid, pos, rot);

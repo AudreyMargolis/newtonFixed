@@ -54,8 +54,7 @@ public class PaddleBehavior : MonoBehaviour {
             audio2.volume = (force / 1500f) + 0.3f;
             if (grabbed)
             {
-                if(animScript.tethered)
-                    animScript.ExitTether();
+                animScript.ExitTether();
                 if (Input.GetMouseButton(0))
                 {
                     Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 15);
@@ -90,7 +89,7 @@ public class PaddleBehavior : MonoBehaviour {
                     //apply forcestuff here
                     if (paused)
                         Pause();
-                    if (charges > 0)
+                    if (charges >= 0)
                     {
                         animScript.StartCharge();
                         StartCoroutine(Fire(force));
@@ -107,7 +106,7 @@ public class PaddleBehavior : MonoBehaviour {
                     {
                         if (paused)
                             Pause();
-                        if (charges > 0)
+                        if (charges >= 0)
                         {
                             animScript.StartCharge();
                             StartCoroutine(Fire(force));
@@ -120,7 +119,7 @@ public class PaddleBehavior : MonoBehaviour {
                     }
                 }
             }
-            if (!grabbed)
+            if (!grabbed && charges > 0)
             {
                 if (Input.GetMouseButtonDown(0))
                 {
@@ -164,10 +163,7 @@ public class PaddleBehavior : MonoBehaviour {
                 else
                 {
 
-                    if (animScript.tethered == false)
-                    {
-                        animScript.StartTether();
-                    }
+                    animScript.StartTether();
                     transform.parent = ball.transform;
                 }
             }
@@ -225,7 +221,7 @@ public class PaddleBehavior : MonoBehaviour {
     {
        
         gm.playerControl = false;
-        yield return new WaitForSeconds(5f);
+       // yield return new WaitForSeconds(5f);
         if (!scored)
         {
             gm.tutorialMode = true;
@@ -291,18 +287,19 @@ public class PaddleBehavior : MonoBehaviour {
         while (Vector3.Distance(transform.position, lerpTarget.transform.position) > .1f)
         {
 
-            if (Vector3.Distance(transform.position, lerpTarget.transform.position) < 2.5f)
+            if (Vector3.Distance(transform.position, lerpTarget.transform.position) < 3f)
                 animScript.charging = false;
             yield return null;
         }
 
 
         ball.GetComponent<Rigidbody2D>().AddForce(transform.right * fireForce);
-        yield return new WaitForSeconds(0.3f);
-        if(charges <= 0)
+        if (charges <= 0)
         {
             StartCoroutine(Fail());
         }
+        yield return new WaitForSeconds(0.3f);
+        
         isFiring = false;
 
     }
@@ -310,7 +307,7 @@ public class PaddleBehavior : MonoBehaviour {
     {
         animScript.ExitTether();
         yield return new WaitForSeconds(0.3f);
-        animScript.DontAnimate();
+        //animScript.DontAnimate();
     }
    
 }

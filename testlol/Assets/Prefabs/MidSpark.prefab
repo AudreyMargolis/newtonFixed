@@ -16,12 +16,11 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 4000013102785096}
-  - 212: {fileID: 212000011300473208}
-  - 95: {fileID: 95000010697877410}
-  - 114: {fileID: 114000010121709392}
+  - component: {fileID: 4000013102785096}
+  - component: {fileID: 212000011300473208}
+  - component: {fileID: 114000010121709392}
   m_Layer: 0
   m_Name: MidSpark
   m_TagString: Untagged
@@ -36,29 +35,12 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010225443190}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.531, y: 0, z: 0}
+  m_LocalPosition: {x: 18.410122, y: -8.8168, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!95 &95000010697877410
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010225443190}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f6f818d4d62b56b4cb14086cc97cf372, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &114000010121709392
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -70,6 +52,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13530068d5f8dd049ba66a15f81b3e60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sparks:
+  - {fileID: 21300016, guid: 7dee93c2a6abb564da6ec02dfb7e263d, type: 3}
+  - {fileID: 21300018, guid: 7dee93c2a6abb564da6ec02dfb7e263d, type: 3}
+  - {fileID: 21300020, guid: 7dee93c2a6abb564da6ec02dfb7e263d, type: 3}
+  - {fileID: 21300024, guid: 7dee93c2a6abb564da6ec02dfb7e263d, type: 3}
+  - {fileID: 21300026, guid: 7dee93c2a6abb564da6ec02dfb7e263d, type: 3}
 --- !u!212 &212000011300473208
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -84,7 +72,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -92,7 +82,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89

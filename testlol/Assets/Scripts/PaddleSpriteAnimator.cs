@@ -9,10 +9,12 @@ public class PaddleSpriteAnimator : MonoBehaviour {
     public bool tethered = false, charging = false;
     public float animSpeed;
     SpriteRenderer sr;
+    AudioSource audio;
     // Use this for initialization
     void Start ()
     {
         sr = GetComponent<SpriteRenderer>();
+        audio = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -23,26 +25,35 @@ public class PaddleSpriteAnimator : MonoBehaviour {
     public void DontAnimate()
     {
         StopAllCoroutines();
+        //tethered = false;
+       // charging = false;
         sr.sprite = null;
     }
     public void StartTether()
     {
-        tethered = true;
-        StartCoroutine(TetherStart());
+        if (!tethered)
+        {
+            DontAnimate();
+            StartCoroutine(TetherStart());
+        }
     }
     public void ExitTether()
     {
-        tethered = false;
-        StartCoroutine(TetherExit());
+        if (tethered)
+        {
+            DontAnimate();
+            StartCoroutine(TetherExit());
+        }
     }
     public void StartCharge()
     {
-        charging = true;
-        StartCoroutine(ChargingTo());
+            charging = true;
+            StartCoroutine(ChargingTo());
     }
     IEnumerator TetherStart()
     {
-        if(sr == null)
+        tethered = true;
+        if (sr == null)
             sr = GetComponent<SpriteRenderer>();
         sr.sprite = tetherAnimation[0];
         yield return new WaitForSeconds(animSpeed);
@@ -69,6 +80,7 @@ public class PaddleSpriteAnimator : MonoBehaviour {
     }
     IEnumerator TetherExit()
     {
+        tethered = false;
         if (sr == null)
             sr = GetComponent<SpriteRenderer>();
         sr.sprite = tetherAnimation[2];
@@ -77,41 +89,50 @@ public class PaddleSpriteAnimator : MonoBehaviour {
         yield return new WaitForSeconds(animSpeed);
         sr.sprite = tetherAnimation[0];
         yield return new WaitForSeconds(animSpeed);
+        sr.sprite = null;
     }
     IEnumerator ChargingTo()
     {
+        //charging = true;
         if (sr == null)
             sr = GetComponent<SpriteRenderer>();
         while (charging)
         {
-            sr.sprite = chargeToAnimation[0];
-            yield return new WaitForSeconds(animSpeed);
-            sr.sprite = chargeToAnimation[1];
-            yield return new WaitForSeconds(animSpeed);
-            sr.sprite = chargeToAnimation[2];
-            yield return new WaitForSeconds(animSpeed);
+                sr.sprite = chargeToAnimation[0];
+                yield return new WaitForSeconds(animSpeed);
+           
+                sr.sprite = chargeToAnimation[1];
+                yield return new WaitForSeconds(animSpeed);
+         
+ 
+                sr.sprite = chargeToAnimation[2];
+                yield return new WaitForSeconds(animSpeed);
         }
         StartCoroutine(Fire());   
     }
     IEnumerator Fire()
     {
+       
+        audio.Play();
         if (sr == null)
             sr = GetComponent<SpriteRenderer>();
         sr.sprite = fireAnimation[0];
-        yield return new WaitForSeconds(animSpeed);
+        yield return new WaitForSeconds(animSpeed/2);
         sr.sprite = fireAnimation[1];
-        yield return new WaitForSeconds(animSpeed);
+        yield return new WaitForSeconds(animSpeed / 2);
         sr.sprite = fireAnimation[2]; ;
-        yield return new WaitForSeconds(animSpeed);
+        yield return new WaitForSeconds(animSpeed / 2);
         sr.sprite = fireAnimation[3];
-        yield return new WaitForSeconds(animSpeed);
+        yield return new WaitForSeconds(animSpeed / 2);
         sr.sprite = fireAnimation[4];
-        yield return new WaitForSeconds(animSpeed);
+        yield return new WaitForSeconds(animSpeed / 2);
         sr.sprite = fireAnimation[5];
-        yield return new WaitForSeconds(animSpeed);
+        yield return new WaitForSeconds(animSpeed / 2);
         sr.sprite = fireAnimation[6];
-        yield return new WaitForSeconds(animSpeed);
+        yield return new WaitForSeconds(animSpeed / 2);
         sr.sprite = fireAnimation[7];
-        yield return new WaitForSeconds(animSpeed);
+        yield return new WaitForSeconds(animSpeed / 2);
+        StartCoroutine(TetherStart());
+        //DontAnimate();
     }
 }
