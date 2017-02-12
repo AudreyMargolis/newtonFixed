@@ -740,7 +740,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 375, y: 70}
-  m_Spacing: {x: 10, y: 10}
+  m_Spacing: {x: 200, y: 10}
   m_Constraint: 2
   m_ConstraintCount: 2
 --- !u!1 &967751936
@@ -1352,7 +1352,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "What is the yadda yadda of the balh blah \nblah blah ????????????"
+  m_Text: What is the equation for caluculating force?
 --- !u!222 &1721041178
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1652,7 +1652,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: wrong
+  m_Text: force = velocity x acceleration
 --- !u!222 &1945503233
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1726,7 +1726,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: wrong
+  m_Text: force = mass x velocity
 --- !u!222 &1957295231
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1800,7 +1800,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: right
+  m_Text: force = mass x acceleration
 --- !u!222 &1958785006
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1874,7 +1874,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: wrong
+  m_Text: mass = force x acceleration
 --- !u!222 &2042368784
 CanvasRenderer:
   m_ObjectHideFlags: 0

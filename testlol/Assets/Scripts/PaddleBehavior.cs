@@ -14,29 +14,25 @@ public class PaddleBehavior : MonoBehaviour {
     Vector2 savedVelocity;
     float savedAngularVelocity;
     public int maxForce = 1500;
-
-    public Texture2D cursorTexture;
-    public CursorMode cursorMode = CursorMode.Auto;
-    public Vector2 hotSpot = Vector2.zero;
-
     public GameObject paddleAnimator;
     PaddleSpriteAnimator animScript;
     //GameObject tempTether, tempFiring;
     public bool scored = false;
     bool isRunning = false;
     bool isFiring = false;
-    public AudioSource audio1, audio2;
 
-
+    void Awake()
+    {
+        gm = (GameManager)FindObjectOfType(typeof(GameManager));
+        gm.LevelStart();
+    }
     // Use this for initialization
     void Start() {
-        gm = (GameManager)FindObjectOfType(typeof(GameManager));
+       
         gm.ChargeUpdate(charges);
         //gm.PauseUpdate(pauses);
-        Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
         Pause();
         maxForce = 1500;
-        //audio = GetComponent<AudioSource>();
         pauses = 0;
         scored = false;
         animScript = paddleAnimator.GetComponent<PaddleSpriteAnimator>();
@@ -48,10 +44,7 @@ public class PaddleBehavior : MonoBehaviour {
     {
         if (gm.playerControl)
         {
-            audio1.pitch = (force / 1500f) + 0.3f;
-            audio1.volume = (force / 1500f) + 0.3f;
-            audio2.pitch = (force / 1500f) + 0.3f;
-            audio2.volume = (force / 1500f) + 0.3f;
+           
             if (grabbed)
             {
                 animScript.ExitTether();
@@ -168,10 +161,7 @@ public class PaddleBehavior : MonoBehaviour {
                 }
             }
 
-            Vector3 lookTo = ball.transform.position;
-            lookTo = lookTo - transform.position;
-            float angle = Mathf.Atan2(lookTo.y, lookTo.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            
            
         }
         else
@@ -217,6 +207,18 @@ public class PaddleBehavior : MonoBehaviour {
             }
         }
     }
+    void LateUpdate()
+    {
+        if (gm.playerControl)
+        {
+            gm.ForceUpdate(force);
+
+            Vector3 lookTo = ball.transform.position;
+            lookTo = lookTo - transform.position;
+            float angle = Mathf.Atan2(lookTo.y, lookTo.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
+    }
     IEnumerator Fail()
     {
        
@@ -239,10 +241,6 @@ public class PaddleBehavior : MonoBehaviour {
             gm.Fail();
         }
 
-    }
-    void LateUpdate()
-    {
-        gm.ForceUpdate(force);
     }
     public void Pause()
     {

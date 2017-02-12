@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using LoLSDK;
 public class CamFollow : MonoBehaviour
 {
     public GameObject ball;
@@ -9,6 +9,7 @@ public class CamFollow : MonoBehaviour
     public float smooth = 1f;
     bool followPLayer, isRunning;
     int pointPos;
+
 	// Use this for initialization
 	void Start ()
     {
@@ -20,7 +21,9 @@ public class CamFollow : MonoBehaviour
         followPLayer = false;
         isRunning = false;
         pointPos = 0;
-	}
+
+        LOLSDK.Instance.PlaySound("main level music.mp3", true, true);
+    }
 	
 	// Update is called once per frame
 	void Update ()

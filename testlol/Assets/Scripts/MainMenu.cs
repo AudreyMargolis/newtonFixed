@@ -1,15 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using LoLSDK;
 public class MainMenu : MonoBehaviour
 {
     public GameObject[] levelPanels;
-    public AudioClip prevMenu, nextMenu, buttonClick;
-    AudioSource audio;
+
     int currentPanel;
 	void Start()
     {
-        audio = GetComponent<AudioSource>();
+       // LOLSDK.Instance.PlaySound("mayhaps lvl music or menu.mp3", true, true);
         currentPanel = 0;
     }
     public void ToLevel()
@@ -18,32 +17,28 @@ public class MainMenu : MonoBehaviour
     }
     public void ToMenu()
     {
+       // LOLSDK.Instance.PlaySound("menu out.mp3");
         levelPanels[currentPanel].SetActive(false);
         currentPanel = 0;
         levelPanels[currentPanel].SetActive(true);
     }
     public void NextPanel()
     {
-        audio.clip = nextMenu;
-        audio.Play();
+       // LOLSDK.Instance.PlaySound("menu in.mp3");
         levelPanels[currentPanel].SetActive(false);
         currentPanel++;
-        Debug.Log(currentPanel);
         levelPanels[currentPanel].SetActive(true);
     }
     public void PreviousPanel()
     {
-        audio.clip = prevMenu;
-        audio.Play();
+       // LOLSDK.Instance.PlaySound("menu out.mp3");
         levelPanels[currentPanel].SetActive(false);
         currentPanel--;
-        Debug.Log(currentPanel);
         levelPanels[currentPanel].SetActive(true);
     }
     public void LevelPicked(int level)
     {
-        audio.clip = buttonClick;
-        audio.Play();
+       // LOLSDK.Instance.PlaySound("menu click.mp3");
         StartCoroutine(LevelLoad(level));
        
     }

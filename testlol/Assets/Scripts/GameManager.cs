@@ -2,9 +2,9 @@
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-//using LoLSDK;
+using LoLSDK;
 
-public class GameManager : MySingleton<GameManager>
+public class GameManager : MonoBehaviour
 {
     
 
@@ -12,32 +12,40 @@ public class GameManager : MySingleton<GameManager>
     Image chargeFill;
     int gamescore;
     public float lvlscore = 1000;
+    int runningScore;
+    int progress;
     public int lvlCharges, lvlPauses, bonusCharges, bonusPauses, startCharge, startPause, maxForce;
     public GameObject forceUI, chargeUI,chargeUIBar, pauseUI, winUI;
     public GameObject paddle;
     public bool playerControl,tutorialMode;
     bool isPlaying;
-
+    private static GameManager instance = null;
     // Use this for initialization
     void Awake()
     {
-        //LOLSDK.Init("com.margolisdesign.projectnewton");
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        LOLSDK.Init("com.margolisdesign.projectnewton");
+        
+        runningScore = 0;
+        progress = 0;
         Application.targetFrameRate = 30;
+        LOLSDK.Instance.SubmitProgress(0, 0, 11);
+        
 
     }
-    void Start ()
-    {
-        
-    }
-	
-	// Update is called once per frame
-	void Update ()
-    {
-        
-    }
-    void OnLevelWasLoaded ()
+    public void LevelStart ()
     {
         lvlscore = 1000;
+
         playerControl = false;
         tutorialMode = false;
         InvokeRepeating("LessenScore", 1.0f, 1.0f);
@@ -57,11 +65,7 @@ public class GameManager : MySingleton<GameManager>
             paddle = GameObject.Find("Paddle");
         if (paddle != null)
         {
-            if (SceneManager.GetActiveScene().buildIndex != 1)
-            {
-                paddle.GetComponent<PaddleBehavior>().charges += bonusCharges;
-                startCharge = paddle.GetComponent<PaddleBehavior>().charges;
-            }
+            startCharge = paddle.GetComponent<PaddleBehavior>().charges;
         }
         
     }
@@ -76,9 +80,11 @@ public class GameManager : MySingleton<GameManager>
         lvlscore = lvlscore * mod;
         paddle.GetComponent<PaddleBehavior>().scored = true;
         LevelUI ui = (LevelUI)FindObjectOfType(typeof(LevelUI));
-        ui.WinScreen(lvlscore);
-        
-        //LOLSDK.Instance.CompleteGame();
+        runningScore += (int)lvlscore;
+        progress++;
+        ui.WinScreen(lvlscore, runningScore);
+        LOLSDK.Instance.SubmitProgress(runningScore, progress, 11);
+       
     }
     public void Fail()
     {
@@ -86,8 +92,8 @@ public class GameManager : MySingleton<GameManager>
         //lvlscore = lvlscore * mod;
         lvlscore = 0;
         LevelUI ui = (LevelUI)FindObjectOfType(typeof(LevelUI));
-        ui.WinScreen(lvlscore);
-
+        ui.WinScreen(lvlscore,runningScore);
+      
         //LOLSDK.Instance.CompleteGame();
     }
     public void Reload()
@@ -96,7 +102,10 @@ public class GameManager : MySingleton<GameManager>
     }
     public void LevelEnd()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        if (progress == 11)
+            LOLSDK.Instance.CompleteGame();
+        else
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     public void MainMenuLoad()
     {
@@ -133,16 +142,9 @@ public class GameManager : MySingleton<GameManager>
     public void LoadLevelAfterQuiz(bool right)
     {
         if (right)
-        {
-            bonusCharges = 2;
-            bonusPauses = 1;
-        }
-        else
-        {
-            bonusCharges = 0;
-            bonusPauses = 0;
-        }
-
+            runningScore += 1000;
+        LOLSDK.Instance.SubmitProgress(runningScore, progress, 11);
+        progress++;
         int nextScene = SceneManager.GetActiveScene().buildIndex + 1;
         SceneManager.LoadScene(nextScene);
     }

@@ -9,7 +9,7 @@ public class LookAt : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update ()
+	void LateUpdate ()
     {
         transform.LookAt(paddle.transform.position);
 	}

@@ -5,7 +5,7 @@ public class Testapi : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-        GameManager gm = GameManager.instance;
+       // GameManager gm = GameManager.instance;
     }
 	
 	// Update is called once per frame
@@ -14,7 +14,7 @@ public class Testapi : MonoBehaviour {
 	}
     public void StartLevel()
     {
-        GameManager a= (GameManager)FindObjectOfType(typeof(GameManager));
-        a.LevelEnd();
+       // GameManager a= (GameManager)FindObjectOfType(typeof(GameManager));
+        //a.LevelEnd();
     }
 }

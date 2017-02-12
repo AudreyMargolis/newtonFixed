@@ -3,10 +3,10 @@ using System.Collections;
 
 public class QuestionButton : MonoBehaviour
 {
-    AudioSource audio;
+    //AudioSource audio;
 	// Use this for initialization
 	void Start () {
-        audio = GetComponent<AudioSource>();
+       // audio = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -15,6 +15,7 @@ public class QuestionButton : MonoBehaviour
 	}
     public void PlaySOund()
     {
-        audio.Play();
+        //audio.Play();
+
     }
 }

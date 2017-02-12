@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using LoLSDK;
 public class Goal : MonoBehaviour
 {
    
     public float scoreMod;
     bool scored;
-    AudioSource audio;
 	// Use this for initialization
 	void Start ()
     {
@@ -18,8 +17,6 @@ public class Goal : MonoBehaviour
         if (gameObject.tag == "GoalBad")
             scoreMod = 1f;
         scored = false;
-        audio = GetComponent<AudioSource>();
-
     }
 	
 	// Update is called once per frame
@@ -36,9 +33,8 @@ public class Goal : MonoBehaviour
             {
                 if (!scored)
                 {
-                    GameObject cam = GameObject.FindGameObjectWithTag("MainCamera");
-                    cam.GetComponent<AudioSource>().Stop();
-                    audio.Play();
+                    //LOLSDK.Instance.StopSound("lo-fi idea sketch for lvl music.mp3");
+                    //LOLSDK.Instance.PlaySound("win.mp3");
                     GameManager gm = (GameManager)FindObjectOfType(typeof(GameManager));
                     gm.Goal(scoreMod);
                     scored = true;

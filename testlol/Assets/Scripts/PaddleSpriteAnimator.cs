@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using LoLSDK;
 
 public class PaddleSpriteAnimator : MonoBehaviour {
     public Sprite[] tetherAnimation;
@@ -9,18 +10,10 @@ public class PaddleSpriteAnimator : MonoBehaviour {
     public bool tethered = false, charging = false;
     public float animSpeed;
     SpriteRenderer sr;
-    AudioSource audio;
     // Use this for initialization
     void Start ()
     {
         sr = GetComponent<SpriteRenderer>();
-        audio = GetComponent<AudioSource>();
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-		
 	}
     public void DontAnimate()
     {
@@ -112,8 +105,8 @@ public class PaddleSpriteAnimator : MonoBehaviour {
     }
     IEnumerator Fire()
     {
-       
-        audio.Play();
+
+        LOLSDK.Instance.PlaySound("max impact 100% v3.mp3");
         if (sr == null)
             sr = GetComponent<SpriteRenderer>();
         sr.sprite = fireAnimation[0];
@@ -133,6 +126,5 @@ public class PaddleSpriteAnimator : MonoBehaviour {
         sr.sprite = fireAnimation[7];
         yield return new WaitForSeconds(animSpeed / 2);
         StartCoroutine(TetherStart());
-        //DontAnimate();
     }
 }

@@ -109,7 +109,8 @@ QualitySettings:
     particleRaycastBudget: 256
     asyncUploadTimeSlice: 2
     asyncUploadBufferSize: 4
-    excludedTargetPlatforms: []
+    excludedTargetPlatforms:
+    - WebGL
   - serializedVersion: 2
     name: Beautiful
     pixelLightCount: 3
@@ -135,7 +136,8 @@ QualitySettings:
     particleRaycastBudget: 1024
     asyncUploadTimeSlice: 2
     asyncUploadBufferSize: 4
-    excludedTargetPlatforms: []
+    excludedTargetPlatforms:
+    - WebGL
   - serializedVersion: 2
     name: Fantastic
     pixelLightCount: 4
@@ -161,7 +163,8 @@ QualitySettings:
     particleRaycastBudget: 4096
     asyncUploadTimeSlice: 2
     asyncUploadBufferSize: 4
-    excludedTargetPlatforms: []
+    excludedTargetPlatforms:
+    - WebGL
   m_PerPlatformDefaultQuality:
     Android: 2
     Nintendo 3DS: 5
@@ -173,7 +176,7 @@ QualitySettings:
     Standalone: 5
     Tizen: 2
     Web: 5
-    WebGL: 3
+    WebGL: 2
     WiiU: 5
     Windows Store Apps: 5
     XBOX360: 5
