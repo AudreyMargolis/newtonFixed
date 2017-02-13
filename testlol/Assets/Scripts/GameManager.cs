@@ -102,9 +102,6 @@ public class GameManager : MonoBehaviour
     }
     public void LevelEnd()
     {
-        if (progress == 11)
-            LOLSDK.Instance.CompleteGame();
-        else
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     public void MainMenuLoad()
