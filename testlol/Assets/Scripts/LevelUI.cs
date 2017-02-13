@@ -17,10 +17,18 @@ public class LevelUI : MonoBehaviour {
         winUI.SetActive(true);
         statsPanel.SetActive(false);
         if(lvlscore == 0)
+        {
             scoreUI.GetComponent<Text>().text = "FAILED";
+            StartCoroutine(Reset());
+        } 
         else
+        {
             scoreUI.GetComponent<Text>().text = "Level Score " + lvlscore;
+            StartCoroutine(NextLevel());
+        }
+            
         totalScoreUI.GetComponent<Text>().text = "Total Score " + totalscore;
+       
       //  Cursor.visible = true;
        // Cursor.lockState = CursorLockMode.None;
     }
@@ -44,6 +52,16 @@ public class LevelUI : MonoBehaviour {
     {
         yield return new WaitForSeconds(0.5f);
         gm.LoadLevelAfterQuiz(right);
+    }
+    IEnumerator NextLevel()
+    {
+        yield return new WaitForSeconds(2f);
+        CompleteLevel();
+    }
+    IEnumerator Reset()
+    {
+        yield return new WaitForSeconds(2f);
+        Restart();
     }
 
 }
