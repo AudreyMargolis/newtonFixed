@@ -18,12 +18,12 @@ public class BallSoundsAndEffects : MonoBehaviour {
         if (gameObject.GetComponent<Rigidbody2D>().velocity.magnitude < 5)
         {
             Instantiate(sparkMid, pos, rot);
-            LOLSDK.Instance.PlaySound("impact hit ver 2.mp3");
+            LOLSDK.Instance.PlaySound("ImpactHit.mp3");
         }
         else
         {
             Instantiate(sparkHigh, pos, rot);
-            LOLSDK.Instance.PlaySound("max impact 100% v1.mp3");
+            LOLSDK.Instance.PlaySound("BigImpactHit.mp3");
         }
     }
 }

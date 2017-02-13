@@ -106,7 +106,7 @@ public class PaddleSpriteAnimator : MonoBehaviour {
     IEnumerator Fire()
     {
 
-        LOLSDK.Instance.PlaySound("max impact 100% v3.mp3");
+        LOLSDK.Instance.PlaySound("blaster.mp3");
         if (sr == null)
             sr = GetComponent<SpriteRenderer>();
         sr.sprite = fireAnimation[0];

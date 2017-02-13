@@ -22,7 +22,7 @@ public class CamFollow : MonoBehaviour
         isRunning = false;
         pointPos = 0;
 
-        LOLSDK.Instance.PlaySound("main level music.mp3", true, true);
+        LOLSDK.Instance.PlaySound("GameplayMusic.mp3", true, true);
     }
 	
 	// Update is called once per frame

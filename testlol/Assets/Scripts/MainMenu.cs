@@ -8,7 +8,7 @@ public class MainMenu : MonoBehaviour
     int currentPanel;
 	void Start()
     {
-       // LOLSDK.Instance.PlaySound("mayhaps lvl music or menu.mp3", true, true);
+        LOLSDK.Instance.PlaySound("MenuMusic.mp3", true, true);
         currentPanel = 0;
     }
     public void ToLevel()
@@ -17,28 +17,28 @@ public class MainMenu : MonoBehaviour
     }
     public void ToMenu()
     {
-       // LOLSDK.Instance.PlaySound("menu out.mp3");
+        LOLSDK.Instance.PlaySound("menuOut.mp3");
         levelPanels[currentPanel].SetActive(false);
         currentPanel = 0;
         levelPanels[currentPanel].SetActive(true);
     }
     public void NextPanel()
     {
-       // LOLSDK.Instance.PlaySound("menu in.mp3");
+        LOLSDK.Instance.PlaySound("menuIn.mp3");
         levelPanels[currentPanel].SetActive(false);
         currentPanel++;
         levelPanels[currentPanel].SetActive(true);
     }
     public void PreviousPanel()
     {
-       // LOLSDK.Instance.PlaySound("menu out.mp3");
+        LOLSDK.Instance.PlaySound("menuOut.mp3");
         levelPanels[currentPanel].SetActive(false);
         currentPanel--;
         levelPanels[currentPanel].SetActive(true);
     }
     public void LevelPicked(int level)
     {
-       // LOLSDK.Instance.PlaySound("menu click.mp3");
+        LOLSDK.Instance.PlaySound("menuClick.mp3");
         StartCoroutine(LevelLoad(level));
        
     }
