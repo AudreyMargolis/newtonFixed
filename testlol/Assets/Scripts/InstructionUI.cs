@@ -23,10 +23,16 @@ public class InstructionUI : MonoBehaviour {
         LOLSDK.Instance.PlaySound("menuClick.mp3");
         StartCoroutine(LevelLoad());
     }
+   
     IEnumerator LevelLoad()
     {
         yield return new WaitForSeconds(0.5f);
         GameManager a = (GameManager)FindObjectOfType(typeof(GameManager));
         a.LevelEnd();
+    }
+    public void EndGame()
+    {
+        GameManager gm = (GameManager)FindObjectOfType(typeof(GameManager));
+        gm.EndGame();
     }
 }

@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     Image chargeFill;
     int gamescore;
     public float lvlscore = 1000;
-    int runningScore;
+    public int runningScore;
     int progress;
     public int lvlCharges, lvlPauses, bonusCharges, bonusPauses, startCharge, startPause, maxForce;
     public GameObject forceUI, chargeUI,chargeUIBar, pauseUI, winUI;
@@ -148,5 +148,9 @@ public class GameManager : MonoBehaviour
     public void LevelLoad (int level)
     {
         SceneManager.LoadScene(level);
+    }
+    public void EndGame()
+    {
+        LOLSDK.Instance.CompleteGame();
     }
 }
